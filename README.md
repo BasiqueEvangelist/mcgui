@@ -1,4 +1,4 @@
-<center>
+<div align="center">
 
 ![](./icon.png)
 
@@ -6,7 +6,7 @@
 
 A GUI library for fabric. Simple HTML like syntax and easy to use.
 
-</center>
+</div>
 
 <hr>
 
