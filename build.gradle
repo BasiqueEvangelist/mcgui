@@ -44,7 +44,6 @@ dependencies {
     include "org.reflections:reflections:0.9.12"
 
     shadow ("org.aperlambda:lambdajcommon:1.8.1") {
-        // Minecraft already has all the google dependencies.
         exclude group: 'com.google.code.gson'
         exclude group: 'com.google.guava'
     }
