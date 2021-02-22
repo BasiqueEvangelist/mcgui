@@ -24,16 +24,16 @@ public class ButtonParser implements Parser<UIButton> {
         }
 
         // Button events
-        if(attr.hasKey("@click")) {
+        if(attr.hasKey("onclick")) {
             try {
-                btn.onClick = doc.controller.getDeclaredMethod(attr.get("@click"), new Class[]{ UIView.class, UIButton.class });
+                btn.onClick = doc.controller.getDeclaredMethod(attr.get("onclick"), new Class[]{ UIView.class, UIButton.class });
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
         }
-        if(attr.hasKey("@render")) {
+        if(attr.hasKey("onrender")) {
             try {
-                btn.renderEvent = doc.controller.getDeclaredMethod(attr.get("@render"), new Class[]{ UIView.class });
+                btn.renderEvent = doc.controller.getDeclaredMethod(attr.get("onrender"), new Class[]{ UIView.class });
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
@@ -45,7 +45,7 @@ public class ButtonParser implements Parser<UIButton> {
         btn.width = Integer.parseInt(attr.get("width"));
         btn.height = Integer.parseInt(attr.get("height"));
 
-        if(attr.hasKey("@id")) btn.id = attr.get("id");
+        if(attr.hasKey("id")) btn.id = attr.get("id");
 
         return btn;
     }

@@ -25,9 +25,9 @@ public class LabelParser implements Parser<UILabel> {
         }
 
         // Label events
-        if(attr.hasKey("@render")) {
+        if(attr.hasKey("onrender")) {
             try {
-                lbl.renderEvent = doc.controller.getDeclaredMethod(attr.get("@render"), new Class[]{ UIView.class });
+                lbl.renderEvent = doc.controller.getDeclaredMethod(attr.get("onrender"), new Class[]{ UIView.class });
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }

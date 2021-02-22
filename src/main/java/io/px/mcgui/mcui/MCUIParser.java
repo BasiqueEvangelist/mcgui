@@ -55,10 +55,10 @@ public class MCUIParser {
         }
 
         // Events
-        if(attr.hasKey("@render")) {
+        if(attr.hasKey("onrender")) {
             try {
                 if(document.controller != null) {
-                    document.renderEvent = document.controller.getDeclaredMethod(attr.get("@render"), new Class[]{ UIView.class });
+                    document.renderEvent = document.controller.getDeclaredMethod(attr.get("onrender"), new Class[]{ UIView.class });
                 }
             } catch (Exception e) {
                 e.printStackTrace();
