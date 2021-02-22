@@ -4,7 +4,7 @@
  */
 package io.px.mcgui.mcui;
 
-import io.px.mcgui.mcui.elements.UIDocument;
+import io.px.mcgui.mcui.elements.UIView;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
@@ -22,7 +22,7 @@ public enum DocumentManager implements SimpleSynchronousResourceReloadListener {
     INSTANCE;
 
     private static final Logger LOGGER = LogManager.getLogger("MCGui/DocumentManager");
-    private final HashMap<Identifier, UIDocument> views = new HashMap<>();
+    private final HashMap<Identifier, UIView> views = new HashMap<>();
 
     @Override
     public void apply(ResourceManager manager) {
@@ -40,7 +40,7 @@ public enum DocumentManager implements SimpleSynchronousResourceReloadListener {
         }
     }
 
-    public @Nullable UIDocument fetch(Identifier id) {
+    public @Nullable UIView fetch(Identifier id) {
         return views.get(id);
     }
 

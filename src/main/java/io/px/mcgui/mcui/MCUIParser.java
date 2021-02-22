@@ -5,11 +5,7 @@
 
 package io.px.mcgui.mcui;
 
-import io.px.mcgui.logging.Logger;
-import io.px.mcgui.mcui.elements.UIDocument;
-import io.px.mcgui.mcui.parsers.ButtonParser;
-import io.px.mcgui.mcui.parsers.LabelParser;
-import io.px.mcgui.mcui.parsers.SeparatorParser;
+import io.px.mcgui.mcui.elements.UIView;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import org.jsoup.nodes.Attributes;
@@ -29,19 +25,28 @@ public class MCUIParser {
      * @param doc A JSoup document.
      * @return A parsed MCUI document.
      */
-    public static UIDocument parse(Document doc) {
+    public static UIView parse(Document doc) {
         Element root = doc.body().children().first();
 
-        @Nullable UIDocument document = null;
+        @Nullable UIView document = null;
 
         Attributes attr = root.attributes();
 
         // Title
         if(attr.hasKey("title")) {
             if(root.attributes().get("loc").equals("true")) {
-                document = new UIDocument(null, new TranslatableText(root.attributes().get("title")));
+                document = new UIView(null, new TranslatableText(root.attributes().get("title")));
             } else {
-                document = new UIDocument(null, new LiteralText(root.attributes().get("title")));
+                document = new UIView(null, new LiteralText(root.attributes().get("title")));
+            }
+        }
+
+        if(attr.hasKey("controller")) {
+            try {
+                Class<?> c = Class.forName(attr.get("controller"));
+                document.controller = c;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
@@ -51,7 +56,13 @@ public class MCUIParser {
 
         // Events
         if(attr.hasKey("@render")) {
-            document.renderEvent = attr.get("@render");
+            try {
+                if(document.controller != null) {
+                    document.renderEvent = document.controller.getDeclaredMethod(attr.get("@render"), new Class[]{ UIView.class });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         // Elements

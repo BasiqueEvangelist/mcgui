@@ -1,6 +1,6 @@
 package io.px.mcgui.mcui.parsers;
 
-import io.px.mcgui.mcui.elements.UIDocument;
+import io.px.mcgui.mcui.elements.UIView;
 import io.px.mcgui.mcui.elements.UISeparator;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
@@ -11,7 +11,7 @@ public class SeparatorParser implements Parser<UISeparator> {
     public static SeparatorParser getInstance() {
         return new SeparatorParser();
     }
-    public UISeparator parse(Element element, UIDocument doc) {
+    public UISeparator parse(Element element, UIView doc) {
         UISeparator sep = new UISeparator();
 
         Attributes attr = element.attributes();
@@ -26,7 +26,13 @@ public class SeparatorParser implements Parser<UISeparator> {
         }
 
         // Separator events
-        if(attr.hasKey("@render")) sep.renderEvent = attr.get("@render");
+        if(attr.hasKey("@render")) {
+            try {
+                sep.renderEvent = doc.controller.getDeclaredMethod(attr.get("@render"), new Class[]{ UIView.class });
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }
 
         // Separator transform
         sep.width = Integer.parseInt(attr.get("width"));

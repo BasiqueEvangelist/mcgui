@@ -1,10 +1,8 @@
 package io.px.mcgui.mcui.renderers;
 
-import io.px.mcgui.exceptions.RegistryNotFoundException;
 import io.px.mcgui.logging.Logger;
-import io.px.mcgui.mcui.MethodsRegistry;
 import io.px.mcgui.mcui.elements.UIButton;
-import io.px.mcgui.mcui.elements.UIDocument;
+import io.px.mcgui.mcui.elements.UIView;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceButtonWidget;
 
@@ -13,12 +11,23 @@ public class ButtonRenderer implements Renderer<UIButton> {
         return new ButtonRenderer();
     }
     @Override
-    public void render(UIDocument document, UIButton button) {
-        SpruceButtonWidget tmp = new SpruceButtonWidget(Position.of(button.x, button.y), button.width, button.height, button.getContentsAsText(), btn -> {
+    public void render(UIView document, UIButton button) {
+
+        if(button.renderEvent != null) {
             try {
-                MethodsRegistry.fetch(button.onClick).invoke(button, document, null);
-            } catch (RegistryNotFoundException e) {
+                button.renderEvent.invoke(document.getControllerInstance(), document, button);
+            } catch (Exception e) {
                 e.printStackTrace();
+            }
+        }
+
+        SpruceButtonWidget tmp = new SpruceButtonWidget(Position.of(button.x, button.y), button.width, button.height, button.getContentsAsText(), btn -> {
+            if(button.onClick != null) {
+                try {
+                    button.onClick.invoke(document.getControllerInstance(), document, button);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         tmp.setVisible(true);

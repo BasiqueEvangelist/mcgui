@@ -1,6 +1,6 @@
 package io.px.mcgui.mcui.parsers;
 
-import io.px.mcgui.mcui.elements.UIDocument;
+import io.px.mcgui.mcui.elements.UIView;
 import io.px.mcgui.mcui.elements.UILabel;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
@@ -11,7 +11,7 @@ public class LabelParser implements Parser<UILabel> {
     public static LabelParser getInstance() {
         return new LabelParser();
     }
-    public UILabel parse(Element element, UIDocument doc) {
+    public UILabel parse(Element element, UIView doc) {
         System.out.println(element);
         UILabel lbl = new UILabel();
 
@@ -25,7 +25,13 @@ public class LabelParser implements Parser<UILabel> {
         }
 
         // Label events
-        if(attr.hasKey("@render")) lbl.renderEvent = attr.get("@render");
+        if(attr.hasKey("@render")) {
+            try {
+                lbl.renderEvent = doc.controller.getDeclaredMethod(attr.get("@render"), new Class[]{ UIView.class });
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }
 
         // Label transform
         lbl.fixedWidth = Integer.parseInt(attr.get("fixedwidth"));

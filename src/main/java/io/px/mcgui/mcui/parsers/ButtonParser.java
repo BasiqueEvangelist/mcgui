@@ -1,7 +1,7 @@
 package io.px.mcgui.mcui.parsers;
 
 import io.px.mcgui.mcui.elements.UIButton;
-import io.px.mcgui.mcui.elements.UIDocument;
+import io.px.mcgui.mcui.elements.UIView;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import org.jsoup.nodes.Attributes;
@@ -11,7 +11,7 @@ public class ButtonParser implements Parser<UIButton> {
     public static ButtonParser getInstance() {
         return new ButtonParser();
     }
-    public UIButton parse(Element element, UIDocument doc) {
+    public UIButton parse(Element element, UIView doc) {
         UIButton btn = new UIButton();
 
         Attributes attr = element.attributes();
@@ -24,8 +24,20 @@ public class ButtonParser implements Parser<UIButton> {
         }
 
         // Button events
-        if(attr.hasKey("@click")) btn.onClick = attr.get("@click");
-        if(attr.hasKey("@render")) btn.renderEvent = attr.get("@render");
+        if(attr.hasKey("@click")) {
+            try {
+                btn.onClick = doc.controller.getDeclaredMethod(attr.get("@click"), new Class[]{ UIView.class, UIButton.class });
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }
+        if(attr.hasKey("@render")) {
+            try {
+                btn.renderEvent = doc.controller.getDeclaredMethod(attr.get("@render"), new Class[]{ UIView.class });
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }
 
         // Button transform
         btn.x = Integer.parseInt(attr.get("x"));

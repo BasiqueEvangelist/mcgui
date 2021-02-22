@@ -5,11 +5,13 @@
 
 package io.px.mcgui.mcui.elements;
 
+import java.lang.reflect.Method;
+
 public class UIElement {
     public String id;
     public UIType type;
 
-    public String renderEvent;
+    public Method renderEvent;
 
     public UIElement() {
         type = UIType.ROOT;

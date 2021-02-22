@@ -7,11 +7,13 @@ package io.px.mcgui.mcui.elements;
 
 import net.minecraft.text.Text;
 
+import java.lang.reflect.Method;
+
 public class UIButton extends UIElement {
 
     public Text contents;
     
-    public String onClick;
+    public Method onClick;
 
     public int x;
     public int y;

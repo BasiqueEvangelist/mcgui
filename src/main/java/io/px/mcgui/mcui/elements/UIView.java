@@ -5,9 +5,7 @@
 
 package io.px.mcgui.mcui.elements;
 
-import io.px.mcgui.exceptions.RegistryNotFoundException;
 import io.px.mcgui.logging.Logger;
-import io.px.mcgui.mcui.MethodsRegistry;
 import io.px.mcgui.mcui.renderers.ButtonRenderer;
 import io.px.mcgui.mcui.renderers.LabelRenderer;
 import io.px.mcgui.mcui.renderers.SeparatorRenderer;
@@ -21,23 +19,36 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UIDocument extends SpruceScreen {
+public class UIView extends SpruceScreen {
     public Screen parent;
 
     public List<UIElement> nonIDElements = new ArrayList<>();
+    public Class<?> controller;
+
+    public Object getControllerInstance() {
+        try {
+            return controller.getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Object();
+    }
+
     public HashMap<String, UIElement> IDElements = new HashMap<>();
 
     // Title
     public boolean showTitle = true;
 
     // Events
-    public String renderEvent;
+    public Method renderEvent;
 
-    public UIDocument(@Nullable Screen parent, Text title) {
+    public UIView(@Nullable Screen parent, Text title) {
         super(title);
         this.parent = parent;
     }
@@ -64,8 +75,8 @@ public class UIDocument extends SpruceScreen {
     protected void init() {
         super.init();
         try {
-            MethodsRegistry.fetch(renderEvent).invoke(null, this, null);
-        } catch (RegistryNotFoundException e) {
+            renderEvent.invoke(getControllerInstance(), this);
+        } catch (Exception e) {
 
         }
         IDElements.values().forEach(element -> {
