@@ -2,7 +2,7 @@
  * MCGui is licensed under the Mozilla Public License 2.0
  * Failure to follow this license will result in further action.
  */
-package io.px.mcgui;
+package io.px.mcgui.testmod;
 
 import io.px.mcgui.logging.Logger;
 import io.px.mcgui.mcui.DocumentRegistry;
@@ -14,7 +14,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.LiteralText;
 
-public class MCGuiMain implements ModInitializer {
+public class MCGuiTestmod implements ModInitializer {
     @Override
     public void onInitialize() {
         try {
@@ -28,7 +28,7 @@ public class MCGuiMain implements ModInitializer {
                 }
                 Logger.info(String.format("Element(type=%s)@render invoked.", elm.type.toString()));
             });
-            DocumentRegistry.register("mcgui:test_file", MCUIParser.parse(ResourceHelper.getFileFromResource("assets/mcgui/test.mcui", MCGuiMain.class), true));
+            DocumentRegistry.register("mcgui:test_file", MCUIParser.parse(ResourceHelper.getFileFromResource("assets/mcgui-testmod/test.mcui", MCGuiTestmod.class), true));
         } catch (Exception e) {
             e.printStackTrace();
         }

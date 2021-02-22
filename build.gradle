@@ -1,5 +1,6 @@
 import net.fabricmc.loom.task.RemapJarTask
-
+import net.fabricmc.loom.task.RunClientTask
+import net.fabricmc.loom.task.RunServerTask
 
 plugins {
     id 'fabric-loom' version '0.6-SNAPSHOT'
@@ -23,6 +24,21 @@ repositories {
         url = 'https://aperlambda.github.io/maven'
     }
     maven { url = "https://jitpack.io" }
+}
+
+sourceSets {
+    testmod {
+        compileClasspath += main.compileClasspath
+        runtimeClasspath += main.runtimeClasspath
+    }
+}
+
+task runTestmodClient(type: RunClientTask) {
+    classpath sourceSets.testmod.runtimeClasspath
+}
+
+task runTestmodServer(type: RunServerTask) {
+    classpath sourceSets.testmod.runtimeClasspath
 }
 
 configurations {
@@ -50,6 +66,7 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: '*.jar')
 
+    testmodCompile sourceSets.main.output
 }
 
 processResources {

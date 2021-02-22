@@ -17,17 +17,6 @@
   "license": "CC0-1.0",
   "icon": "assets/mcgui/icon.png",
   "environment": "*",
-  "entrypoints": {
-    "main": [
-      "io.px.mcgui.MCGuiMain"
-    ],
-    "server": [
-      "io.px.mcgui.MCGuiServer"
-    ],
-    "client": [
-      "io.px.mcgui.MCGuiClient"
-    ]
-  },
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
