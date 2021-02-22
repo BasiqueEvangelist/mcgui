@@ -1,12 +1,18 @@
 package io.px.mcgui.mcui.renderers;
 
-import io.px.mcgui.logging.Logger;
 import io.px.mcgui.mcui.elements.UIView;
+import io.px.mcgui.exceptions.RegistryNotFoundException;
+import io.px.mcgui.mcui.MethodsRegistry;
+import io.px.mcgui.mcui.elements.UIDocument;
 import io.px.mcgui.mcui.elements.UILabel;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceLabelWidget;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LabelRenderer implements Renderer<UILabel> {
+    private static final Logger LOGGER = LogManager.getLogger("MCGui/LabelRenderer");
+
     public static LabelRenderer getInstance() {
         return new LabelRenderer();
     }
@@ -23,9 +29,7 @@ public class LabelRenderer implements Renderer<UILabel> {
             }
         }
 
-
-
         document.add(tmp);
-        Logger.info("Registered label with content - " + label.contents);
+        LOGGER.debug("Registered label with content - {}", label.contents);
     }
 }
