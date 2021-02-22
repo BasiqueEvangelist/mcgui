@@ -55,17 +55,9 @@ public class MCUIParser {
         }
 
         // Elements
+
         for (Element element : root.children()) {
-            Logger.info(element.nodeName());
-            if (element.nodeName().equals("label")) {
-                document.addElement(LabelParser.getInstance().parse(element, document));
-            }
-            if (element.nodeName().equals("button")) {
-                document.addElement(ButtonParser.getInstance().parse(element, document));
-            }
-            if (element.nodeName().equals("separator")) {
-                document.addElement(SeparatorParser.getInstance().parse(element, document));
-            }
+            document.addElement(ElementParserRegistry.get(element.nodeName()).parse(element, document));
         }
 
         return document;
