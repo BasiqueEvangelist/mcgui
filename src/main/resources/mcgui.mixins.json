@@ -5,7 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [],
   "client": [
-    "TitleScreenMixin"
+    "io.px.mcgui.mixins.TitleScreenMixin"
   ],
   "server": [],
   "injectors": {

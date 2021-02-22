@@ -5,11 +5,13 @@
   "name": "MCGui",
   "description": "A GUI library for fabric. Simple HTML like syntax and easy to use. ",
   "authors": [
-    "calum6541"
+    "px01tv",
+    "SpaceClouds42",
+    "calum6541 (Original Author, vanished)"
   ],
   "contact": {
-    "homepage": "https://discord.gg/UaqnXhSdNg",
-    "sources": "https://github.com/diabolical17/mcgui"
+    "homepage": "https://mcgui.cf",
+    "sources": "https://github.com/px01tv/mcgui"
   },
 
   "license": "CC0-1.0",
@@ -17,13 +19,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "cal.codes.mcgui.MCGuiMain"
+      "io.px.mcgui.MCGuiMain"
     ],
     "server": [
-      "cal.codes.mcgui.MCGuiServer"
+      "io.px.mcgui.MCGuiServer"
     ],
     "client": [
-      "cal.codes.mcgui.MCGuiClient"
+      "io.px.mcgui.MCGuiClient"
     ]
   },
   "mixins": [
@@ -35,6 +37,11 @@
     "minecraft": "1.16.x"
   },
   "custom": {
-    "modmenu:api": true
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/FMBkdJkD"
+      },
+      "badges": [ "library" ]
+    }
   }
 }

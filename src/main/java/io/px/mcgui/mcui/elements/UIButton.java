@@ -1,0 +1,34 @@
+/*
+ * MCGui is licensed under the Mozilla Public License 2.0
+ * Failure to follow this license will result in further action.
+ */
+
+package io.px.mcgui.mcui.elements;
+
+import net.minecraft.text.Text;
+
+public class UIButton extends UIElement {
+
+    public Text contents;
+    
+    public String onClick;
+
+    public int x;
+    public int y;
+
+    public int width;
+    public int height;
+
+    public UIButton() {
+        type = UIType.BUTTON;
+    }
+
+    public String getContents() {
+        return contents.asString();
+    }
+
+    public Text getContentsAsText() {
+        return contents;
+    }
+
+}
