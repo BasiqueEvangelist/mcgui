@@ -1,14 +1,17 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.exceptions.RegistryNotFoundException;
-import io.px.mcgui.logging.Logger;
 import io.px.mcgui.mcui.MethodsRegistry;
 import io.px.mcgui.mcui.elements.UIDocument;
 import io.px.mcgui.mcui.elements.UISeparator;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceSeparatorWidget;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SeparatorRenderer implements Renderer<UISeparator> {
+    private static final Logger LOGGER = LogManager.getLogger("MCGui/ButtonRenderer");
+
     public static SeparatorRenderer getInstance() {
         return new SeparatorRenderer();
     }
@@ -23,6 +26,6 @@ public class SeparatorRenderer implements Renderer<UISeparator> {
         SpruceSeparatorWidget tmp = new SpruceSeparatorWidget(Position.of(separator.x, separator.y), separator.width, separator.title);
         tmp.setVisible(true);
         document.add(tmp);
-        Logger.info("Registered separator.");
+        LOGGER.debug("Registered separator.");
     }
 }

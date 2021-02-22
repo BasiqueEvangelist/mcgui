@@ -1,14 +1,17 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.exceptions.RegistryNotFoundException;
-import io.px.mcgui.logging.Logger;
 import io.px.mcgui.mcui.MethodsRegistry;
 import io.px.mcgui.mcui.elements.UIButton;
 import io.px.mcgui.mcui.elements.UIDocument;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceButtonWidget;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ButtonRenderer implements Renderer<UIButton> {
+    private static final Logger LOGGER = LogManager.getLogger("MCGui/ButtonRenderer");
+
     public static ButtonRenderer getInstance() {
         return new ButtonRenderer();
     }
@@ -23,6 +26,6 @@ public class ButtonRenderer implements Renderer<UIButton> {
         });
         tmp.setVisible(true);
         document.add(tmp.asVanilla());
-        Logger.info("Registered button with action - " + button.onClick);
+        LOGGER.debug("Registered button with action - {}", button.onClick);
     }
 }

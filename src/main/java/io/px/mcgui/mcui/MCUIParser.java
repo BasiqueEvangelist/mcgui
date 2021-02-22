@@ -5,11 +5,7 @@
 
 package io.px.mcgui.mcui;
 
-import io.px.mcgui.logging.Logger;
 import io.px.mcgui.mcui.elements.UIDocument;
-import io.px.mcgui.mcui.parsers.ButtonParser;
-import io.px.mcgui.mcui.parsers.LabelParser;
-import io.px.mcgui.mcui.parsers.SeparatorParser;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import org.jsoup.nodes.Attributes;

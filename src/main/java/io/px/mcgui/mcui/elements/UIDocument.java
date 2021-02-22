@@ -6,7 +6,6 @@
 package io.px.mcgui.mcui.elements;
 
 import io.px.mcgui.exceptions.RegistryNotFoundException;
-import io.px.mcgui.logging.Logger;
 import io.px.mcgui.mcui.MethodsRegistry;
 import io.px.mcgui.mcui.renderers.ButtonRenderer;
 import io.px.mcgui.mcui.renderers.LabelRenderer;
@@ -19,6 +18,8 @@ import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class UIDocument extends SpruceScreen {
+    private static final Logger LOGGER = LogManager.getLogger("MCGui/UIDocument");
+
     public Screen parent;
 
     public List<UIElement> nonIDElements = new ArrayList<>();
@@ -69,14 +72,12 @@ public class UIDocument extends SpruceScreen {
 
         }
         IDElements.values().forEach(element -> {
-            System.out.println(element);
             if(element.type == UIType.ROOT) return;
             if(element.type == UIType.LABEL) LabelRenderer.getInstance().render(this, (UILabel) element);
             if(element.type == UIType.BUTTON) ButtonRenderer.getInstance().render(this, (UIButton) element);
             if(element.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(this, (UISeparator) element);
         });
         nonIDElements.forEach(element -> {
-            System.out.println(element);
             if(element.type == UIType.ROOT) return;
             if(element.type == UIType.LABEL) LabelRenderer.getInstance().render(this, (UILabel) element);
             if(element.type == UIType.BUTTON) ButtonRenderer.getInstance().render(this, (UIButton) element);
@@ -87,7 +88,7 @@ public class UIDocument extends SpruceScreen {
     public void addElement(UIElement element) {
         if(element.id == null) {
             nonIDElements.add(element);
-            Logger.warn("Added element did not have an ID!");
+            LOGGER.warn("Added element did not have an ID!");
             return;
         }
         IDElements.put(element.id, element);

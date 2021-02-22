@@ -12,7 +12,6 @@ public class LabelParser implements Parser<UILabel> {
         return new LabelParser();
     }
     public UILabel parse(Element element, UIDocument doc) {
-        System.out.println(element);
         UILabel lbl = new UILabel();
 
         Attributes attr = element.attributes();
