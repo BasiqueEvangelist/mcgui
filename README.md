@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <div align="center">
+=======
+<center>
+>>>>>>> 22255e33f234aa544998d102e6a875f0a5fdb4b9
 
 ![](./icon.png)
 
@@ -6,7 +10,11 @@
 
 A GUI library for fabric. Simple HTML like syntax and easy to use.
 
+<<<<<<< HEAD
 </div>
+=======
+</center>
+>>>>>>> 22255e33f234aa544998d102e6a875f0a5fdb4b9
 
 <hr>
 
