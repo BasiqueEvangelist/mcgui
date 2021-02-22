@@ -1,9 +1,6 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.mcui.elements.UIView;
-import io.px.mcgui.exceptions.RegistryNotFoundException;
-import io.px.mcgui.mcui.MethodsRegistry;
-import io.px.mcgui.mcui.elements.UIDocument;
 import io.px.mcgui.mcui.elements.UILabel;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceLabelWidget;

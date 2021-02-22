@@ -1,10 +1,7 @@
 package io.px.mcgui.mcui.renderers;
 
-import io.px.mcgui.exceptions.RegistryNotFoundException;
-import io.px.mcgui.logging.Logger;
-import io.px.mcgui.mcui.MethodsRegistry;
 import io.px.mcgui.mcui.elements.UIButton;
-import io.px.mcgui.mcui.elements.UIDocument;
+import io.px.mcgui.mcui.elements.UIView;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceButtonWidget;
 import org.apache.logging.log4j.LogManager;
