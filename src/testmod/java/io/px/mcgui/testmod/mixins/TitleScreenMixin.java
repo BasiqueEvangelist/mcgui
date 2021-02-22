@@ -5,14 +5,14 @@
 
 package io.px.mcgui.testmod.mixins;
 
-import io.px.mcgui.mcui.DocumentRegistry;
-import io.px.mcgui.mcui.elements.UIDocument;
+import io.px.mcgui.mcui.DocumentManager;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceButtonWidget;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -29,12 +29,9 @@ public class TitleScreenMixin extends Screen
     @Inject(method = "init", at = @At("RETURN"))
     private void onInit(CallbackInfo ci)
     {
-        try {
-            UIDocument doc = DocumentRegistry.fetch("mcgui:test_file");
-            this.addButton(new SpruceButtonWidget(Position.of(0, 12), 150, 20, new LiteralText("SpruceUI Test Menu"),
-                    btn -> this.client.openScreen(doc)).asVanilla());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.addButton(new SpruceButtonWidget(Position.of(0, 12), 150, 20, new LiteralText("SpruceUI Test Menu"),
+            btn -> {
+                this.client.openScreen(DocumentManager.INSTANCE.fetch(new Identifier("mcgui-testmod:test")));
+            }).asVanilla());
     }
 }
