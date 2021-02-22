@@ -1,3 +1,5 @@
+*This is a fork of the diabolical17/mcgui repo, which has since been removed from GitHub for an unknown reason.*
+
 # McGUI
 
 A GUI framework for fabric. Simple HTML like syntax and easy to use. 
