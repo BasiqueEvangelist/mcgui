@@ -26,4 +26,5 @@ public final class ElementParserRegistry {
     public static final LabelParser LABEL = register("label", new LabelParser());
     public static final SeparatorParser SEPARATOR = register("separator", new SeparatorParser());
     public static final CheckboxParser CHECKBOX = register("checkbox", new CheckboxParser());
+    public static final TemplateParser TEMPLATE = register("template", new TemplateParser());
 }

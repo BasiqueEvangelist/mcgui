@@ -9,4 +9,5 @@ public enum UIType {
     BUTTON, CHECKBOX,
     LABEL, ROOT,
     SEPARATOR,
+    TEMPLATE,
 }

@@ -1,0 +1,6 @@
+<template>
+    <label x="50" y="50" fixedwidth="350">I want you to press this button please.</label>
+    <button x="50" y="75" width="350" height="20" onclick="onButtonClick">Press me!</button>
+    <!-- This template doesn't have a controller set, so it uses whatever controller the screen has. -->
+    <separator x="50" y="105" title="test.lang.key" width="350" loc="true"></separator>
+</template>

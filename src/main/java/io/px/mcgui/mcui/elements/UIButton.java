@@ -15,9 +15,6 @@ public class UIButton extends UIElement {
     
     public Method onClick;
 
-    public int x;
-    public int y;
-
     public int width;
     public int height;
 

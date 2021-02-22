@@ -8,8 +8,6 @@ public class UISeparator extends UIElement {
         this.type = UIType.SEPARATOR;
     }
 
-    public int x;
-    public int y;
     public int width;
     public Text title;
 

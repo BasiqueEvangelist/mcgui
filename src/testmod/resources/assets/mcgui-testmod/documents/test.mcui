@@ -4,10 +4,5 @@
   -->
 
 <screen controller="io.px.mcgui.testmod.TestController" title="test">
-    <label x="50" y="50" fixedwidth="350">I want you to press this button please.</label>
-    <button x="50" y="75" width="350" height="20" onclick="onButtonClick">Press me!</button>
-    <separator x="50" y="105" title="test.lang.key" width="350" loc="true"></separator>
-<!--    <checkbox defaultstate="false" x="50" y="135">-->
-<!--        Check me!-->
-<!--    </checkbox>-->
+    <template x="0" y="0" type="mcgui-testmod:test"></template>
 </screen>

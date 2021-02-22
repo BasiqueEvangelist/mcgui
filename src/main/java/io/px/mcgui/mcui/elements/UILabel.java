@@ -11,9 +11,6 @@ public class UILabel extends UIElement {
 
     public Text contents;
     public int fixedWidth;
-    public int x;
-    public int y;
-
 
     public UILabel() {
         type = UIType.LABEL;

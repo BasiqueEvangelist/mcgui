@@ -9,7 +9,11 @@ import java.lang.reflect.Method;
 
 public class UIElement {
     public String id;
+    public int x;
+    public int y;
     public UIType type;
+
+    public UIElement parent;
 
     public Method renderEvent;
 

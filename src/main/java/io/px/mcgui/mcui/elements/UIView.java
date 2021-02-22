@@ -8,6 +8,7 @@ package io.px.mcgui.mcui.elements;
 import io.px.mcgui.mcui.renderers.ButtonRenderer;
 import io.px.mcgui.mcui.renderers.LabelRenderer;
 import io.px.mcgui.mcui.renderers.SeparatorRenderer;
+import io.px.mcgui.mcui.renderers.TemplateRenderer;
 import me.lambdaurora.spruceui.Tooltip;
 import me.lambdaurora.spruceui.screen.SpruceScreen;
 import me.lambdaurora.spruceui.widget.SpruceSeparatorWidget;
@@ -23,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -97,9 +99,9 @@ public class UIView extends SpruceScreen {
 
     public void addElement(UIElement element) {
         if(element.id == null) {
+            System.out.println(element);
             nonIDElements.add(element);
             LOGGER.warn("Added element did not have an ID!");
-            return;
         }
         IDElements.put(element.id, element);
     }

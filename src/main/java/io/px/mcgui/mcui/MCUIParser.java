@@ -5,6 +5,8 @@
 
 package io.px.mcgui.mcui;
 
+import io.px.mcgui.mcui.elements.UIElement;
+import io.px.mcgui.mcui.elements.UITemplate;
 import io.px.mcgui.mcui.elements.UIView;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
@@ -13,6 +15,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MCUIParser {
 
@@ -72,6 +77,20 @@ public class MCUIParser {
         }
 
         return document;
+    }
+    /**
+     * Parse a .mcui file from a JSoup Document.
+     * @param doc A JSoup document.
+     * @return A parsed MCUI document.
+     */
+    public static UITemplate parseTemplate(Document doc) {
+        Element root = doc.body().children().first();
+
+        UITemplate template = new UITemplate();
+
+        template.elements = new HashSet<>(root.children());
+
+        return template;
     }
 }
 

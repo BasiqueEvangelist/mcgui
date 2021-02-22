@@ -1,6 +1,7 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.mcui.elements.UIButton;
+import io.px.mcgui.mcui.elements.UITemplate;
 import io.px.mcgui.mcui.elements.UIView;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceButtonWidget;
@@ -16,18 +17,25 @@ public class ButtonRenderer implements Renderer<UIButton> {
     @Override
     public void render(UIView document, UIButton button) {
 
+        Object controller = document.getControllerInstance();
+
+        if (button.parent instanceof UITemplate) {
+            controller = ((UITemplate) button.parent).getControllerInstance(controller);
+        }
+
         if(button.renderEvent != null) {
             try {
-                button.renderEvent.invoke(document.getControllerInstance(), document, button);
+                button.renderEvent.invoke(controller, document, button);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
+        Object finalController = controller;
         SpruceButtonWidget tmp = new SpruceButtonWidget(Position.of(button.x, button.y), button.width, button.height, button.getContentsAsText(), btn -> {
             if(button.onClick != null) {
                 try {
-                    button.onClick.invoke(document.getControllerInstance(), document, button);
+                    button.onClick.invoke(finalController, document, button);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
