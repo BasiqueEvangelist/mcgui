@@ -24,6 +24,10 @@ public class SeparatorRenderer implements Renderer<UISeparator> {
             controller = ((UITemplate) separator.parent).getControllerInstance(controller);
         }
 
+        SpruceSeparatorWidget tmp = new SpruceSeparatorWidget(Position.of(separator.x, separator.y), separator.width, separator.title);
+
+        separator.rendered = tmp;
+
         if (separator.renderEvent != null) {
             try {
                 separator.renderEvent.invoke(controller, document, separator);
@@ -32,7 +36,6 @@ public class SeparatorRenderer implements Renderer<UISeparator> {
             }
         }
 
-        SpruceSeparatorWidget tmp = new SpruceSeparatorWidget(Position.of(separator.x, separator.y), separator.width, separator.title);
         tmp.setVisible(true);
         document.add(tmp);
         LOGGER.debug("Registered separator.");

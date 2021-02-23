@@ -5,6 +5,8 @@
 
 package io.px.mcgui.mcui.elements;
 
+import me.lambdaurora.spruceui.widget.SpruceWidget;
+
 import java.lang.reflect.Method;
 
 public class UIElement {
@@ -14,6 +16,7 @@ public class UIElement {
     public UIType type;
 
     public UIElement parent;
+    public SpruceWidget rendered;
 
     public Method renderEvent;
 

@@ -2,6 +2,7 @@ package io.px.mcgui.mcui.parsers;
 
 import io.px.mcgui.mcui.elements.UIButton;
 import io.px.mcgui.mcui.elements.UIView;
+import me.lambdaurora.spruceui.widget.SpruceButtonWidget;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import org.jsoup.nodes.Attributes;

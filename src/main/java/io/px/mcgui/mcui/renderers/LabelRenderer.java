@@ -27,6 +27,8 @@ public class LabelRenderer implements Renderer<UILabel> {
         SpruceLabelWidget tmp = new SpruceLabelWidget(Position.of(label.x, label.y), label.getContentsAsText(), label.fixedWidth);
         tmp.setVisible(true);
 
+        label.rendered = tmp;
+
         if (label.renderEvent != null) {
             try {
                 label.renderEvent.invoke(controller, document, label);
