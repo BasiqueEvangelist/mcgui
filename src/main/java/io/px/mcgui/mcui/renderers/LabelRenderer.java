@@ -1,8 +1,7 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.mcui.elements.UILabel;
-import io.px.mcgui.mcui.elements.ViewScreen;
-import io.px.mcgui.mcui.templating.UITemplate;
+import io.px.mcgui.mcui.elements.UIView;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceLabelWidget;
 import org.apache.logging.log4j.LogManager;
@@ -18,13 +17,8 @@ public class LabelRenderer implements Renderer<UILabel> {
     }
 
     @Override
-    public void render(ViewScreen screen, UILabel label) {
-
-        Object controller = screen.getControllerInstance();
-
-        if (label.parent instanceof UITemplate) {
-            controller = ((UITemplate) label.parent).getControllerInstance(controller);
-        }
+    public void render(UIView<?> view, UILabel label) {
+        Object controller = view.getControllerInstance();
 
         SpruceLabelWidget tmp = new SpruceLabelWidget(Position.of(label.x, label.y), label.getContentsAsText(), label.fixedWidth);
         tmp.setVisible(true);
@@ -33,13 +27,13 @@ public class LabelRenderer implements Renderer<UILabel> {
 
         if (label.renderEvent != null) {
             try {
-                label.renderEvent.invoke(controller, screen, label);
+                label.renderEvent.invoke(controller, view, label);
             } catch (InvocationTargetException | IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        screen.add(tmp);
+        view.addMinecraftElement(tmp);
         LOGGER.debug("Registered label with content - {}", label.contents);
     }
 }

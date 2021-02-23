@@ -1,6 +1,6 @@
 package io.px.mcgui.mcui;
 
-import io.px.mcgui.mcui.templating.UITemplate;
+import io.px.mcgui.mcui.templating.TemplateBlueprint;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
@@ -18,7 +18,7 @@ public enum TemplateManager implements SimpleSynchronousResourceReloadListener {
     INSTANCE;
 
     private static final Logger LOGGER = LogManager.getLogger("MCGui/TemplateManager");
-    private final HashMap<Identifier, UITemplate> templates = new HashMap<>();
+    private final HashMap<Identifier, TemplateBlueprint<?>> templates = new HashMap<>();
 
     @Override
     public void apply(ResourceManager manager) {
@@ -35,8 +35,9 @@ public enum TemplateManager implements SimpleSynchronousResourceReloadListener {
         }
     }
 
-    public @Nullable UITemplate fetch(Identifier id) {
-        return templates.get(id);
+    @SuppressWarnings("unchecked")
+    public <C> @Nullable TemplateBlueprint<C> fetch(Identifier id) {
+        return (TemplateBlueprint<C>) templates.get(id);
     }
 
     @Override

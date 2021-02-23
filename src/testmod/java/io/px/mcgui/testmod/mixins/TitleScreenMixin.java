@@ -31,7 +31,7 @@ public class TitleScreenMixin extends Screen
     {
         this.addButton(new SpruceButtonWidget(Position.of(0, 12), 150, 20, new LiteralText("SpruceUI Test Menu"),
             btn -> {
-                MCGUI.openScreen(new Identifier("mcgui-testmod", "test"));
+                MCGUI.openScreen(new Identifier("mcgui-testmod", "test"), this);
             }).asVanilla());
     }
 }

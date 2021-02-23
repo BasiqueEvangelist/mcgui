@@ -1,4 +1,4 @@
-<template>
+<template controller="io.px.mcgui.testmod.TestController">
     <label x="50" y="50" fixedwidth="350">I want you to press this button please.</label>
     <button id="epicButton" x="50" y="75" width="350" height="20" onclick="onButtonClick">I've been clicked 0 times!</button>
     <!-- This template doesn't have a controller set, so it uses whatever controller the screen has. -->

@@ -5,19 +5,18 @@
 
 package io.px.mcgui.mcui;
 
-import io.px.mcgui.mcui.elements.UIElement;
-import io.px.mcgui.mcui.elements.ViewScreen;
-import io.px.mcgui.mcui.templating.UITemplate;
-import io.px.mcgui.mcui.toasts.ToastParser;
+import io.px.mcgui.mcui.blueprints.BlueprintParserRegistry;
+import io.px.mcgui.mcui.blueprints.ViewScreenBlueprint;
+import io.px.mcgui.mcui.elements.UIView;
+import io.px.mcgui.mcui.templating.TemplateBlueprint;
 import io.px.mcgui.mcui.toasts.UIToast;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
-import javax.annotation.Nullable;
-import java.util.HashSet;
 
 public class MCUIParser {
 
@@ -31,26 +30,26 @@ public class MCUIParser {
      * @param doc A JSoup document.
      * @return A parsed MCUI document.
      */
-    public static ViewScreen parseScreen(Document doc) {
+    @SuppressWarnings("unchecked")
+    public static ViewScreenBlueprint<?> parseScreen(Document doc) {
         Element root = doc.body().children().first();
 
-        @Nullable ViewScreen screen = null;
+        ViewScreenBlueprint<Object> screen = new ViewScreenBlueprint<>();
 
         Attributes attr = root.attributes();
 
         // Title
         if (attr.hasKey("title")) {
             if (root.attributes().get("loc").equals("true")) {
-                screen = new ViewScreen(null, new TranslatableText(root.attributes().get("title")));
+                screen.title = new TranslatableText(root.attributes().get("title"));
             } else {
-                screen = new ViewScreen(null, new LiteralText(root.attributes().get("title")));
+                screen.title = new LiteralText(root.attributes().get("title"));
             }
         }
 
         if (attr.hasKey("controller")) {
             try {
-                Class<?> c = Class.forName(attr.get("controller"));
-                screen.controller = c;
+                screen.controller = (Class<Object>) Class.forName(attr.get("controller"));
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -64,7 +63,7 @@ public class MCUIParser {
         if (attr.hasKey("onrender")) {
             if (screen.controller != null) {
                 try {
-                    screen.renderEvent = screen.controller.getDeclaredMethod(attr.get("onrender"), ViewScreen.class);
+                    screen.renderEvent = screen.controller.getDeclaredMethod(attr.get("onrender"), UIView.class);
                 } catch (NoSuchMethodException e) {
                     throw new RuntimeException(e);
                 }
@@ -74,7 +73,7 @@ public class MCUIParser {
         // Elements
 
         for (Element element : root.children()) {
-            screen.addElement((UIElement) ElementParserRegistry.get(element.nodeName()).parse(element, screen));
+            screen.elements.add(BlueprintParserRegistry.get(element.nodeName()).parse(element, screen));
         }
 
         return screen;
@@ -86,21 +85,49 @@ public class MCUIParser {
      * @param doc A JSoup document.
      * @return A parsed MCUI document.
      */
-    public static UITemplate parseTemplate(Document doc) {
+    @SuppressWarnings("unchecked")
+    public static TemplateBlueprint<?> parseTemplate(Document doc) {
         Element root = doc.body().children().first();
 
-        UITemplate template = new UITemplate();
+        TemplateBlueprint<Object> template = new TemplateBlueprint<>();
 
-        template.elements = new HashSet<>(root.children());
+        Attributes attr = root.attributes();
+
+        if (attr.hasKey("controller")) {
+            try {
+                template.controller = (Class<Object>) Class.forName(attr.get("controller"));
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        for (Element element : root.children()) {
+            template.elements.add(BlueprintParserRegistry.get(element.nodeName()).parse(element, template));
+        }
 
         return template;
     }
 
     public static UIToast parseToast(Document doc) {
         Element root = doc.body().children().first();
+        Attributes attr = root.attributes();
 
-        UIToast toast = ToastParser.getInstance().parse(root, null);
-        return toast;
+        Text title;
+        Text contents = null;
+
+        if(attr.get("lang").equals("true")) {
+            title = new TranslatableText(attr.get("title"));
+            if(root.hasText()) {
+                contents = new TranslatableText(root.text());
+            }
+        } else {
+            title = new LiteralText(attr.get("title"));
+            if(root.hasText()) {
+                contents = new LiteralText(root.text());
+            }
+        }
+
+        return new UIToast(SystemToast.Type.valueOf(attr.get("type")), title, contents);
     }
 }
 

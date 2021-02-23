@@ -1,8 +1,7 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.mcui.elements.UISeparator;
-import io.px.mcgui.mcui.templating.UITemplate;
-import io.px.mcgui.mcui.elements.ViewScreen;
+import io.px.mcgui.mcui.elements.UIView;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceSeparatorWidget;
 import org.apache.logging.log4j.LogManager;
@@ -18,13 +17,8 @@ public class SeparatorRenderer implements Renderer<UISeparator> {
     }
 
     @Override
-    public void render(ViewScreen screen, UISeparator separator) {
-
-        Object controller = screen.getControllerInstance();
-
-        if (separator.parent instanceof UITemplate) {
-            controller = ((UITemplate) separator.parent).getControllerInstance(controller);
-        }
+    public void render(UIView<?> view, UISeparator separator) {
+        Object controller = view.getControllerInstance();
 
         SpruceSeparatorWidget tmp = new SpruceSeparatorWidget(Position.of(separator.x, separator.y), separator.width, separator.title);
 
@@ -32,14 +26,14 @@ public class SeparatorRenderer implements Renderer<UISeparator> {
 
         if (separator.renderEvent != null) {
             try {
-                separator.renderEvent.invoke(controller, screen, separator);
+                separator.renderEvent.invoke(controller, view, separator);
             } catch (InvocationTargetException | IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
         }
 
         tmp.setVisible(true);
-        screen.add(tmp);
+        view.addMinecraftElement(tmp);
         LOGGER.debug("Registered separator.");
     }
 }

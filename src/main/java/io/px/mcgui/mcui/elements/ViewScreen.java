@@ -8,6 +8,8 @@ package io.px.mcgui.mcui.elements;
 import io.px.mcgui.mcui.renderers.ButtonRenderer;
 import io.px.mcgui.mcui.renderers.LabelRenderer;
 import io.px.mcgui.mcui.renderers.SeparatorRenderer;
+import io.px.mcgui.mcui.templating.InsertedTemplate;
+import io.px.mcgui.mcui.templating.TemplateRenderer;
 import me.lambdaurora.spruceui.Tooltip;
 import me.lambdaurora.spruceui.screen.SpruceScreen;
 import me.lambdaurora.spruceui.widget.SpruceSeparatorWidget;
@@ -26,19 +28,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ViewScreen extends SpruceScreen {
+public class ViewScreen<C> extends SpruceScreen implements UIView<C> {
     private static final Logger LOGGER = LogManager.getLogger("MCGui/ViewScreen");
     public Screen parent;
 
     public List<UIElement> nonIDElements = new ArrayList<>();
-    public Class<?> controller;
+    public Class<C> controller;
 
-    public Object getControllerInstance() {
+    public C getControllerInstance() {
         try {
             return controller.getDeclaredConstructor().newInstance();
         } catch (InstantiationException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Class<C> getControllerClass() {
+        return controller;
     }
 
     public HashMap<String, UIElement> IDElements = new HashMap<>();
@@ -67,7 +73,7 @@ public class ViewScreen extends SpruceScreen {
         Tooltip.renderAll(this.parent, matrices);
     }
 
-    public <T extends Element> T add(T element) {
+    public <T extends Element> T addMinecraftElement(T element) {
         this.addChild(element);
         return element;
     }
@@ -87,12 +93,14 @@ public class ViewScreen extends SpruceScreen {
             if (element.type == UIType.LABEL) LabelRenderer.getInstance().render(this, (UILabel) element);
             if (element.type == UIType.BUTTON) ButtonRenderer.getInstance().render(this, (UIButton) element);
             if (element.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(this, (UISeparator) element);
+            if (element.type == UIType.TEMPLATE) TemplateRenderer.getInstance().render(this, (InsertedTemplate<?>) element);
         });
         nonIDElements.forEach(element -> {
             if (element.type == UIType.ROOT) return;
             if (element.type == UIType.LABEL) LabelRenderer.getInstance().render(this, (UILabel) element);
             if (element.type == UIType.BUTTON) ButtonRenderer.getInstance().render(this, (UIButton) element);
             if (element.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(this, (UISeparator) element);
+            if (element.type == UIType.TEMPLATE) TemplateRenderer.getInstance().render(this, (InsertedTemplate<?>) element);
         });
     }
 

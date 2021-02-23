@@ -1,8 +1,8 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.mcui.elements.UIElement;
-import io.px.mcgui.mcui.elements.ViewScreen;
+import io.px.mcgui.mcui.elements.UIView;
 
 public interface Renderer<T extends UIElement> {
-    void render(ViewScreen screen, T element);
+    void render(UIView<?> view, T element);
 }

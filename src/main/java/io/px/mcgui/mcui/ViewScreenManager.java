@@ -4,7 +4,7 @@
  */
 package io.px.mcgui.mcui;
 
-import io.px.mcgui.mcui.elements.ViewScreen;
+import io.px.mcgui.mcui.blueprints.ViewScreenBlueprint;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
@@ -22,7 +22,7 @@ public enum ViewScreenManager implements SimpleSynchronousResourceReloadListener
     INSTANCE;
 
     private static final Logger LOGGER = LogManager.getLogger("MCGui/ViewScreenManager");
-    private final HashMap<Identifier, ViewScreen> screens = new HashMap<>();
+    private final HashMap<Identifier, ViewScreenBlueprint<?>> screens = new HashMap<>();
 
     @Override
     public void apply(ResourceManager manager) {
@@ -39,8 +39,9 @@ public enum ViewScreenManager implements SimpleSynchronousResourceReloadListener
         }
     }
 
-    public @Nullable ViewScreen fetch(Identifier id) {
-        return screens.get(id);
+    @SuppressWarnings("unchecked")
+    public <C> @Nullable ViewScreenBlueprint<C> fetch(Identifier id) {
+        return (ViewScreenBlueprint<C>) screens.get(id);
     }
 
     @Override

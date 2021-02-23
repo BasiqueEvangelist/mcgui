@@ -1,8 +1,7 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.mcui.elements.UIButton;
-import io.px.mcgui.mcui.elements.ViewScreen;
-import io.px.mcgui.mcui.templating.UITemplate;
+import io.px.mcgui.mcui.elements.UIView;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceButtonWidget;
 import org.apache.logging.log4j.LogManager;
@@ -18,20 +17,15 @@ public class ButtonRenderer implements Renderer<UIButton> {
     }
 
     @Override
-    public void render(ViewScreen screen, UIButton button) {
-
-        Object controller = screen.getControllerInstance();
-
-        if (button.parent instanceof UITemplate) {
-            controller = ((UITemplate) button.parent).getControllerInstance(controller);
-        }
+    public void render(UIView<?> view, UIButton button) {
+        Object controller = view.getControllerInstance();
 
         Object finalController = controller;
         SpruceButtonWidget tmp = new SpruceButtonWidget(Position.of(button.x, button.y), button.width, button.height, button.getContentsAsText(), btn -> {
             button.rendered = btn;
             if (button.onClick != null) {
                 try {
-                    button.onClick.invoke(finalController, screen, button);
+                    button.onClick.invoke(finalController, view, button);
                 } catch (InvocationTargetException | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
@@ -42,14 +36,14 @@ public class ButtonRenderer implements Renderer<UIButton> {
 
         if (button.renderEvent != null) {
             try {
-                button.renderEvent.invoke(controller, screen, button);
+                button.renderEvent.invoke(controller, view, button);
             } catch (InvocationTargetException | IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
         }
 
         tmp.setVisible(true);
-        screen.add(tmp.asVanilla());
+        view.addMinecraftElement(tmp.asVanilla());
         LOGGER.debug("Registered button with action - {}", button.onClick);
     }
 }

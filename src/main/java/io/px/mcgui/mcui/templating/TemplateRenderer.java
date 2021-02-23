@@ -1,25 +1,31 @@
 package io.px.mcgui.mcui.templating;
 
-import io.px.mcgui.mcui.ElementParserRegistry;
-import io.px.mcgui.mcui.elements.UIElement;
-import io.px.mcgui.mcui.elements.ViewScreen;
+import io.px.mcgui.mcui.elements.*;
+import io.px.mcgui.mcui.renderers.ButtonRenderer;
+import io.px.mcgui.mcui.renderers.LabelRenderer;
 import io.px.mcgui.mcui.renderers.Renderer;
-import org.jsoup.nodes.Element;
+import io.px.mcgui.mcui.renderers.SeparatorRenderer;
 
-public class TemplateRenderer implements Renderer<UITemplate> {
-    public static Renderer<UITemplate> getInstance() {
+public class TemplateRenderer implements Renderer<InsertedTemplate<?>> {
+    public static Renderer<InsertedTemplate<?>> getInstance() {
         return new TemplateRenderer();
     }
 
     @Override
-    public void render(ViewScreen screen, UITemplate element) {
-        for (Element elements : element.elements) {
-            System.out.println(elements.nodeName());
-            UIElement finalElement = (UIElement) ElementParserRegistry.get(elements.nodeName()).parse(elements, screen);
-            finalElement.x += element.x;
-            finalElement.y += element.y;
-            finalElement.parent = element;
-            screen.addElement(finalElement);
-        }
+    public void render(UIView<?> view, InsertedTemplate<?> element) {
+        element.IDElements.values().forEach(child -> {
+            if (child.type == UIType.ROOT) return;
+            if (child.type == UIType.LABEL) LabelRenderer.getInstance().render(element, (UILabel) child);
+            if (child.type == UIType.BUTTON) ButtonRenderer.getInstance().render(element, (UIButton) child);
+            if (child.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(element, (UISeparator) child);
+            if (child.type == UIType.TEMPLATE) TemplateRenderer.getInstance().render(element, (InsertedTemplate<?>) child);
+        });
+        element.nonIDElements.forEach(child -> {
+            if (child.type == UIType.ROOT) return;
+            if (child.type == UIType.LABEL) LabelRenderer.getInstance().render(element, (UILabel) child);
+            if (child.type == UIType.BUTTON) ButtonRenderer.getInstance().render(element, (UIButton) child);
+            if (child.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(element, (UISeparator) child);
+            if (child.type == UIType.TEMPLATE) TemplateRenderer.getInstance().render(element, (InsertedTemplate<?>) child);
+        });
     }
 }

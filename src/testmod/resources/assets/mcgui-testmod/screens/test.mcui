@@ -3,6 +3,6 @@
   ~ Failure to follow this license will result in further action.
   -->
 
-<screen controller="io.px.mcgui.testmod.TestController" title="test">
+<screen title="test">
     <template x="0" y="0" type="mcgui-testmod:test"></template>
 </screen>

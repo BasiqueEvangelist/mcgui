@@ -1,25 +1,28 @@
 package io.px.mcgui;
 
-import io.px.mcgui.mcui.ViewScreenManager;
 import io.px.mcgui.mcui.ToastsManager;
+import io.px.mcgui.mcui.ViewScreenManager;
+import io.px.mcgui.mcui.blueprints.ViewScreenBlueprint;
 import io.px.mcgui.mcui.elements.ViewScreen;
 import io.px.mcgui.mcui.toasts.UIToast;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A utility class that is a mirror for regularly used methods.
  */
 public final class MCGUI {
     /**
-     * Fetch a ViewScreen.
+     * Fetch a ViewScreenBlueprint.
      *
      * @param id The identifier, usually modid:filename
-     * @return The ViewScreen, can be shown using MCGUI.open(ViewScreen screen)
+     * @return The ViewScreenBlueprint, which can then be instantiated via ViewScreenBlueprint.restore
      */
-    public static ViewScreen fetchScreen(Identifier id) {
+    public static <C> ViewScreenBlueprint<C> fetchScreen(Identifier id) {
         return ViewScreenManager.INSTANCE.fetch(id);
     }
 
@@ -29,19 +32,19 @@ public final class MCGUI {
      * @param screen The ViewScreen to open.
      */
     @Environment(EnvType.CLIENT)
-    public static void openScreen(ViewScreen screen) {
+    public static void openScreen(ViewScreen<?> screen) {
         MinecraftClient.getInstance().openScreen(screen);
     }
 
     /**
-     * Open a ViewScreen
+     * Instantiates and opens a ViewScreen
      *
      * @param id The identifier, usually modid:filename
      * @return The ViewScreen that was opened.
      */
     @Environment(EnvType.CLIENT)
-    public static ViewScreen openScreen(Identifier id) {
-        ViewScreen screen = ViewScreenManager.INSTANCE.fetch(id);
+    public static <C> ViewScreen<C> openScreen(Identifier id, @Nullable Screen parent) {
+        ViewScreen<C> screen = ViewScreenManager.INSTANCE.<C>fetch(id).restore(parent);
         MinecraftClient.getInstance().openScreen(screen);
         return screen;
     }
