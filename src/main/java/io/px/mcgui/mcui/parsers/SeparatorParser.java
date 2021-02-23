@@ -1,7 +1,7 @@
 package io.px.mcgui.mcui.parsers;
 
 import io.px.mcgui.mcui.elements.UISeparator;
-import io.px.mcgui.mcui.elements.UIView;
+import io.px.mcgui.mcui.elements.ViewScreen;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import org.jsoup.nodes.Attributes;
@@ -12,7 +12,7 @@ public class SeparatorParser implements Parser<UISeparator> {
         return new SeparatorParser();
     }
 
-    public UISeparator parse(Element element, UIView doc) {
+    public UISeparator parse(Element element, ViewScreen screen) {
         UISeparator sep = new UISeparator();
 
         Attributes attr = element.attributes();
@@ -29,7 +29,7 @@ public class SeparatorParser implements Parser<UISeparator> {
         // Separator events
         if (attr.hasKey("onrender")) {
             try {
-                sep.renderEvent = doc.controller.getDeclaredMethod(attr.get("onrender"), UIView.class);
+                sep.renderEvent = screen.controller.getDeclaredMethod(attr.get("onrender"), ViewScreen.class);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }

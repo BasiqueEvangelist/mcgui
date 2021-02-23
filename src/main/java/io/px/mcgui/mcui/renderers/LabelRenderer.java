@@ -1,8 +1,8 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.mcui.elements.UILabel;
+import io.px.mcgui.mcui.elements.ViewScreen;
 import io.px.mcgui.mcui.templating.UITemplate;
-import io.px.mcgui.mcui.elements.UIView;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceLabelWidget;
 import org.apache.logging.log4j.LogManager;
@@ -16,9 +16,9 @@ public class LabelRenderer implements Renderer<UILabel> {
     }
 
     @Override
-    public void render(UIView document, UILabel label) {
+    public void render(ViewScreen screen, UILabel label) {
 
-        Object controller = document.getControllerInstance();
+        Object controller = screen.getControllerInstance();
 
         if (label.parent instanceof UITemplate) {
             controller = ((UITemplate) label.parent).getControllerInstance(controller);
@@ -31,13 +31,13 @@ public class LabelRenderer implements Renderer<UILabel> {
 
         if (label.renderEvent != null) {
             try {
-                label.renderEvent.invoke(controller, document, label);
+                label.renderEvent.invoke(controller, screen, label);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        document.add(tmp);
+        screen.add(tmp);
         LOGGER.debug("Registered label with content - {}", label.contents);
     }
 }

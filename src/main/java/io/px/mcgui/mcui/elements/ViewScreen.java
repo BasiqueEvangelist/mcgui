@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UIView extends SpruceScreen {
-    private static final Logger LOGGER = LogManager.getLogger("MCGui/UIView");
+public class ViewScreen extends SpruceScreen {
+    private static final Logger LOGGER = LogManager.getLogger("MCGui/ViewScreen");
     public Screen parent;
 
     public List<UIElement> nonIDElements = new ArrayList<>();
@@ -49,7 +49,7 @@ public class UIView extends SpruceScreen {
     // Events
     public Method renderEvent;
 
-    public UIView(@Nullable Screen parent, Text title) {
+    public ViewScreen(@Nullable Screen parent, Text title) {
         super(title);
         this.parent = parent;
     }

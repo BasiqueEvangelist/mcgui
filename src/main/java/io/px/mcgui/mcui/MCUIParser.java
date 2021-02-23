@@ -6,8 +6,8 @@
 package io.px.mcgui.mcui;
 
 import io.px.mcgui.mcui.elements.UIElement;
+import io.px.mcgui.mcui.elements.ViewScreen;
 import io.px.mcgui.mcui.templating.UITemplate;
-import io.px.mcgui.mcui.elements.UIView;
 import io.px.mcgui.mcui.toasts.ToastParser;
 import io.px.mcgui.mcui.toasts.UIToast;
 import net.minecraft.text.LiteralText;
@@ -31,40 +31,40 @@ public class MCUIParser {
      * @param doc A JSoup document.
      * @return A parsed MCUI document.
      */
-    public static UIView parse(Document doc) {
+    public static ViewScreen parseScreen(Document doc) {
         Element root = doc.body().children().first();
 
-        @Nullable UIView document = null;
+        @Nullable ViewScreen screen = null;
 
         Attributes attr = root.attributes();
 
         // Title
         if (attr.hasKey("title")) {
             if (root.attributes().get("loc").equals("true")) {
-                document = new UIView(null, new TranslatableText(root.attributes().get("title")));
+                screen = new ViewScreen(null, new TranslatableText(root.attributes().get("title")));
             } else {
-                document = new UIView(null, new LiteralText(root.attributes().get("title")));
+                screen = new ViewScreen(null, new LiteralText(root.attributes().get("title")));
             }
         }
 
         if (attr.hasKey("controller")) {
             try {
                 Class<?> c = Class.forName(attr.get("controller"));
-                document.controller = c;
+                screen.controller = c;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         if (attr.hasKey("showtitle")) {
-            document.showTitle = Boolean.parseBoolean(attr.get("showtitle"));
+            screen.showTitle = Boolean.parseBoolean(attr.get("showtitle"));
         }
 
         // Events
         if (attr.hasKey("onrender")) {
             try {
-                if (document.controller != null) {
-                    document.renderEvent = document.controller.getDeclaredMethod(attr.get("onrender"), UIView.class);
+                if (screen.controller != null) {
+                    screen.renderEvent = screen.controller.getDeclaredMethod(attr.get("onrender"), ViewScreen.class);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -74,10 +74,10 @@ public class MCUIParser {
         // Elements
 
         for (Element element : root.children()) {
-            document.addElement((UIElement) ElementParserRegistry.get(element.nodeName()).parse(element, document));
+            screen.addElement((UIElement) ElementParserRegistry.get(element.nodeName()).parse(element, screen));
         }
 
-        return document;
+        return screen;
     }
 
     /**

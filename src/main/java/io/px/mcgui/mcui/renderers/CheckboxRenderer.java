@@ -1,11 +1,11 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.mcui.elements.UICheckbox;
-import io.px.mcgui.mcui.elements.UIView;
+import io.px.mcgui.mcui.elements.ViewScreen;
 
 public class CheckboxRenderer implements Renderer<UICheckbox> {
     @Override
-    public void render(UIView document, UICheckbox element) {
+    public void render(ViewScreen screen, UICheckbox element) {
         return;
     }
 }

@@ -4,7 +4,7 @@
  */
 package io.px.mcgui.mcui;
 
-import io.px.mcgui.mcui.elements.UIView;
+import io.px.mcgui.mcui.elements.ViewScreen;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
@@ -18,29 +18,29 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 import java.util.HashMap;
 
-public enum DocumentManager implements SimpleSynchronousResourceReloadListener {
+public enum ViewScreenManager implements SimpleSynchronousResourceReloadListener {
     INSTANCE;
 
-    private static final Logger LOGGER = LogManager.getLogger("MCGui/DocumentManager");
-    private final HashMap<Identifier, UIView> views = new HashMap<>();
+    private static final Logger LOGGER = LogManager.getLogger("MCGui/ViewScreenManager");
+    private final HashMap<Identifier, ViewScreen> screens = new HashMap<>();
 
     @Override
     public void apply(ResourceManager manager) {
-        for (Identifier rawid : manager.findResources("documents", p -> p.endsWith(".mcui"))) {
-            Identifier id = new Identifier(rawid.getNamespace(), rawid.getPath().substring("documents/".length(), rawid.getPath().length() - ".mcui".length()));
+        for (Identifier rawid : manager.findResources("screens", p -> p.endsWith(".mcui"))) {
+            Identifier id = new Identifier(rawid.getNamespace(), rawid.getPath().substring("screens/".length(), rawid.getPath().length() - ".mcui".length()));
             try {
                 Resource res = manager.getResource(rawid);
-                String baseUri = rawid.getNamespace() + "/" + "documents" + "/" + rawid.getPath();
+                String baseUri = rawid.getNamespace() + "/" + rawid.getPath();
                 Document doc = Jsoup.parse(res.getInputStream(), "UTF-8", baseUri);
-                views.put(id, MCUIParser.parse(doc));
+                screens.put(id, MCUIParser.parseScreen(doc));
             } catch (IOException e) {
                 LOGGER.error("Failed to load file {} due to exception: ", id, e);
             }
         }
     }
 
-    public @Nullable UIView fetch(Identifier id) {
-        return views.get(id);
+    public @Nullable ViewScreen fetch(Identifier id) {
+        return screens.get(id);
     }
 
     @Override

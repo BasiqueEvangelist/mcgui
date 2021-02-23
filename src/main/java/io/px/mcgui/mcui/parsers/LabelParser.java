@@ -1,7 +1,7 @@
 package io.px.mcgui.mcui.parsers;
 
 import io.px.mcgui.mcui.elements.UILabel;
-import io.px.mcgui.mcui.elements.UIView;
+import io.px.mcgui.mcui.elements.ViewScreen;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import org.jsoup.nodes.Attributes;
@@ -12,7 +12,7 @@ public class LabelParser implements Parser<UILabel> {
         return new LabelParser();
     }
 
-    public UILabel parse(Element element, UIView doc) {
+    public UILabel parse(Element element, ViewScreen screen) {
         System.out.println(element);
         UILabel lbl = new UILabel();
 
@@ -28,7 +28,7 @@ public class LabelParser implements Parser<UILabel> {
         // Label events
         if (attr.hasKey("onrender")) {
             try {
-                lbl.renderEvent = doc.controller.getDeclaredMethod(attr.get("onrender"), UIView.class);
+                lbl.renderEvent = screen.controller.getDeclaredMethod(attr.get("onrender"), ViewScreen.class);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }

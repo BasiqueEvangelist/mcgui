@@ -1,8 +1,8 @@
 package io.px.mcgui;
 
-import io.px.mcgui.mcui.DocumentManager;
+import io.px.mcgui.mcui.ViewScreenManager;
 import io.px.mcgui.mcui.ToastsManager;
-import io.px.mcgui.mcui.elements.UIView;
+import io.px.mcgui.mcui.elements.ViewScreen;
 import io.px.mcgui.mcui.toasts.UIToast;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,36 +14,36 @@ import net.minecraft.util.Identifier;
  */
 public final class MCGUI {
     /**
-     * Fetch a UIView.
+     * Fetch a ViewScreen.
      *
      * @param id The identifier, usually modid:filename
-     * @return The UIView, can be shown using MCGUI.open(UIView view)
+     * @return The ViewScreen, can be shown using MCGUI.open(ViewScreen screen)
      */
-    public static UIView fetchView(Identifier id) {
-        return DocumentManager.INSTANCE.fetch(id);
+    public static ViewScreen fetchScreen(Identifier id) {
+        return ViewScreenManager.INSTANCE.fetch(id);
     }
 
     /**
-     * Open a UIView.
+     * Open a ViewScreen.
      *
-     * @param view The UIView to open.
+     * @param screen The ViewScreen to open.
      */
     @Environment(EnvType.CLIENT)
-    public static void openView(UIView view) {
-        MinecraftClient.getInstance().openScreen(view);
+    public static void openScreen(ViewScreen screen) {
+        MinecraftClient.getInstance().openScreen(screen);
     }
 
     /**
-     * Open a UIView
+     * Open a ViewScreen
      *
      * @param id The identifier, usually modid:filename
-     * @return The UIView that was opened.
+     * @return The ViewScreen that was opened.
      */
     @Environment(EnvType.CLIENT)
-    public static UIView openView(Identifier id) {
-        UIView view = DocumentManager.INSTANCE.fetch(id);
-        MinecraftClient.getInstance().openScreen(view);
-        return view;
+    public static ViewScreen openScreen(Identifier id) {
+        ViewScreen screen = ViewScreenManager.INSTANCE.fetch(id);
+        MinecraftClient.getInstance().openScreen(screen);
+        return screen;
     }
 
     /**

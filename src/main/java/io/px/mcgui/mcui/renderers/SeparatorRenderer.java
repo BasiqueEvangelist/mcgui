@@ -2,7 +2,7 @@ package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.mcui.elements.UISeparator;
 import io.px.mcgui.mcui.templating.UITemplate;
-import io.px.mcgui.mcui.elements.UIView;
+import io.px.mcgui.mcui.elements.ViewScreen;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceSeparatorWidget;
 import org.apache.logging.log4j.LogManager;
@@ -16,9 +16,9 @@ public class SeparatorRenderer implements Renderer<UISeparator> {
     }
 
     @Override
-    public void render(UIView document, UISeparator separator) {
+    public void render(ViewScreen screen, UISeparator separator) {
 
-        Object controller = document.getControllerInstance();
+        Object controller = screen.getControllerInstance();
 
         if (separator.parent instanceof UITemplate) {
             controller = ((UITemplate) separator.parent).getControllerInstance(controller);
@@ -30,14 +30,14 @@ public class SeparatorRenderer implements Renderer<UISeparator> {
 
         if (separator.renderEvent != null) {
             try {
-                separator.renderEvent.invoke(controller, document, separator);
+                separator.renderEvent.invoke(controller, screen, separator);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         tmp.setVisible(true);
-        document.add(tmp);
+        screen.add(tmp);
         LOGGER.debug("Registered separator.");
     }
 }

@@ -1,8 +1,8 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.mcui.elements.UIButton;
+import io.px.mcgui.mcui.elements.ViewScreen;
 import io.px.mcgui.mcui.templating.UITemplate;
-import io.px.mcgui.mcui.elements.UIView;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceButtonWidget;
 import org.apache.logging.log4j.LogManager;
@@ -16,9 +16,9 @@ public class ButtonRenderer implements Renderer<UIButton> {
     }
 
     @Override
-    public void render(UIView document, UIButton button) {
+    public void render(ViewScreen screen, UIButton button) {
 
-        Object controller = document.getControllerInstance();
+        Object controller = screen.getControllerInstance();
 
         if (button.parent instanceof UITemplate) {
             controller = ((UITemplate) button.parent).getControllerInstance(controller);
@@ -29,7 +29,7 @@ public class ButtonRenderer implements Renderer<UIButton> {
             button.rendered = btn;
             if (button.onClick != null) {
                 try {
-                    button.onClick.invoke(finalController, document, button);
+                    button.onClick.invoke(finalController, screen, button);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -40,14 +40,14 @@ public class ButtonRenderer implements Renderer<UIButton> {
 
         if (button.renderEvent != null) {
             try {
-                button.renderEvent.invoke(controller, document, button);
+                button.renderEvent.invoke(controller, screen, button);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         tmp.setVisible(true);
-        document.add(tmp.asVanilla());
+        screen.add(tmp.asVanilla());
         LOGGER.debug("Registered button with action - {}", button.onClick);
     }
 }

@@ -1,6 +1,6 @@
 package io.px.mcgui.mcui.toasts;
 
-import io.px.mcgui.mcui.elements.UIView;
+import io.px.mcgui.mcui.elements.ViewScreen;
 import io.px.mcgui.mcui.parsers.Parser;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.LiteralText;
@@ -15,7 +15,7 @@ public class ToastParser implements Parser<UIToast> {
     }
 
     @Override
-    public UIToast parse(Element element, UIView doc) {
+    public UIToast parse(Element element, ViewScreen screen) {
         Attributes attr = element.attributes();
 
         Text title;

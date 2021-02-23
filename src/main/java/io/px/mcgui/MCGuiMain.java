@@ -1,6 +1,6 @@
 package io.px.mcgui;
 
-import io.px.mcgui.mcui.DocumentManager;
+import io.px.mcgui.mcui.ViewScreenManager;
 import io.px.mcgui.mcui.TemplateManager;
 import io.px.mcgui.mcui.ToastsManager;
 import net.fabricmc.api.ModInitializer;
@@ -11,7 +11,7 @@ public class MCGuiMain implements ModInitializer {
     @Override
     public void onInitialize() {
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(TemplateManager.INSTANCE);
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(DocumentManager.INSTANCE);
+        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(ViewScreenManager.INSTANCE);
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(ToastsManager.INSTANCE);
     }
 }

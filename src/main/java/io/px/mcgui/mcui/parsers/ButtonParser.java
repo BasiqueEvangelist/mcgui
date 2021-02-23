@@ -1,8 +1,7 @@
 package io.px.mcgui.mcui.parsers;
 
 import io.px.mcgui.mcui.elements.UIButton;
-import io.px.mcgui.mcui.elements.UIView;
-import me.lambdaurora.spruceui.widget.SpruceButtonWidget;
+import io.px.mcgui.mcui.elements.ViewScreen;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import org.jsoup.nodes.Attributes;
@@ -13,7 +12,7 @@ public class ButtonParser implements Parser<UIButton> {
         return new ButtonParser();
     }
 
-    public UIButton parse(Element element, UIView doc) {
+    public UIButton parse(Element element, ViewScreen screen) {
         UIButton btn = new UIButton();
 
         Attributes attr = element.attributes();
@@ -28,14 +27,14 @@ public class ButtonParser implements Parser<UIButton> {
         // Button events
         if (attr.hasKey("onclick")) {
             try {
-                btn.onClick = doc.controller.getDeclaredMethod(attr.get("onclick"), UIView.class, UIButton.class);
+                btn.onClick = screen.controller.getDeclaredMethod(attr.get("onclick"), ViewScreen.class, UIButton.class);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
         }
         if (attr.hasKey("onrender")) {
             try {
-                btn.renderEvent = doc.controller.getDeclaredMethod(attr.get("onrender"), UIView.class);
+                btn.renderEvent = screen.controller.getDeclaredMethod(attr.get("onrender"), ViewScreen.class);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
