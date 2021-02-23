@@ -11,29 +11,30 @@ public class ButtonParser implements Parser<UIButton> {
     public static ButtonParser getInstance() {
         return new ButtonParser();
     }
+
     public UIButton parse(Element element, UIView doc) {
         UIButton btn = new UIButton();
 
         Attributes attr = element.attributes();
 
         // Button contents
-        if(attr.get("loc").equals("true")) {
+        if (attr.get("loc").equals("true")) {
             btn.contents = new TranslatableText(element.text());
         } else {
             btn.contents = new LiteralText(element.text());
         }
 
         // Button events
-        if(attr.hasKey("onclick")) {
+        if (attr.hasKey("onclick")) {
             try {
-                btn.onClick = doc.controller.getDeclaredMethod(attr.get("onclick"), new Class[]{ UIView.class, UIButton.class });
+                btn.onClick = doc.controller.getDeclaredMethod(attr.get("onclick"), UIView.class, UIButton.class);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
         }
-        if(attr.hasKey("onrender")) {
+        if (attr.hasKey("onrender")) {
             try {
-                btn.renderEvent = doc.controller.getDeclaredMethod(attr.get("onrender"), new Class[]{ UIView.class });
+                btn.renderEvent = doc.controller.getDeclaredMethod(attr.get("onrender"), UIView.class);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
@@ -45,7 +46,7 @@ public class ButtonParser implements Parser<UIButton> {
         btn.width = Integer.parseInt(attr.get("width"));
         btn.height = Integer.parseInt(attr.get("height"));
 
-        if(attr.hasKey("id")) btn.id = attr.get("id");
+        if (attr.hasKey("id")) btn.id = attr.get("id");
 
         return btn;
     }

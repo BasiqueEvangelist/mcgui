@@ -1,7 +1,7 @@
 package io.px.mcgui.mcui.parsers;
 
-import io.px.mcgui.mcui.elements.UIView;
 import io.px.mcgui.mcui.elements.UILabel;
+import io.px.mcgui.mcui.elements.UIView;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import org.jsoup.nodes.Attributes;
@@ -11,6 +11,7 @@ public class LabelParser implements Parser<UILabel> {
     public static LabelParser getInstance() {
         return new LabelParser();
     }
+
     public UILabel parse(Element element, UIView doc) {
         System.out.println(element);
         UILabel lbl = new UILabel();
@@ -18,16 +19,16 @@ public class LabelParser implements Parser<UILabel> {
         Attributes attr = element.attributes();
 
         // Label contents
-        if(attr.get("loc").equals("true")) {
+        if (attr.get("loc").equals("true")) {
             lbl.contents = new TranslatableText(element.text());
         } else {
             lbl.contents = new LiteralText(element.text());
         }
 
         // Label events
-        if(attr.hasKey("onrender")) {
+        if (attr.hasKey("onrender")) {
             try {
-                lbl.renderEvent = doc.controller.getDeclaredMethod(attr.get("onrender"), new Class[]{ UIView.class });
+                lbl.renderEvent = doc.controller.getDeclaredMethod(attr.get("onrender"), UIView.class);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
@@ -38,7 +39,7 @@ public class LabelParser implements Parser<UILabel> {
         lbl.x = Integer.parseInt(attr.get("x"));
         lbl.y = Integer.parseInt(attr.get("y"));
 
-        if(attr.hasKey("id")) lbl.id = attr.get("id");
+        if (attr.hasKey("id")) lbl.id = attr.get("id");
 
         return lbl;
     }

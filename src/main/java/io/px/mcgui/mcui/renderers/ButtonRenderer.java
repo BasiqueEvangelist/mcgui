@@ -14,6 +14,7 @@ public class ButtonRenderer implements Renderer<UIButton> {
     public static ButtonRenderer getInstance() {
         return new ButtonRenderer();
     }
+
     @Override
     public void render(UIView document, UIButton button) {
 
@@ -23,7 +24,7 @@ public class ButtonRenderer implements Renderer<UIButton> {
             controller = ((UITemplate) button.parent).getControllerInstance(controller);
         }
 
-        if(button.renderEvent != null) {
+        if (button.renderEvent != null) {
             try {
                 button.renderEvent.invoke(controller, document, button);
             } catch (Exception e) {
@@ -33,7 +34,7 @@ public class ButtonRenderer implements Renderer<UIButton> {
 
         Object finalController = controller;
         SpruceButtonWidget tmp = new SpruceButtonWidget(Position.of(button.x, button.y), button.width, button.height, button.getContentsAsText(), btn -> {
-            if(button.onClick != null) {
+            if (button.onClick != null) {
                 try {
                     button.onClick.invoke(finalController, document, button);
                 } catch (Exception e) {

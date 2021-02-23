@@ -20,12 +20,16 @@ public class SyntaxException extends Exception {
      * The character number.
      */
     public int characterNumber;
+
     public SyntaxException(String ln, int lnNum, int charNum) {
-        line = ln; lineNumber = lnNum; characterNumber = charNum;
+        line = ln;
+        lineNumber = lnNum;
+        characterNumber = charNum;
     }
 
     /**
      * Get the error as a user friendly string.
+     *
      * @return The error, in string format.
      */
     @Override

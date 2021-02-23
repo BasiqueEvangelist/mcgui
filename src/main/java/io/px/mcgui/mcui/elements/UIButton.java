@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 public class UIButton extends UIElement {
 
     public Text contents;
-    
+
     public Method onClick;
 
     public int width;

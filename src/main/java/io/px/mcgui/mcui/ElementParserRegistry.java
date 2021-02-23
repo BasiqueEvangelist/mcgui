@@ -4,7 +4,6 @@ import io.px.mcgui.mcui.parsers.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public final class ElementParserRegistry {
     private static final Map<String, Parser<?>> MAP = new HashMap<>();
@@ -17,7 +16,7 @@ public final class ElementParserRegistry {
         MAP.put(name, parser);
         return parser;
     }
-    
+
     public static Parser<?> get(String name) {
         return MAP.get(name);
     }

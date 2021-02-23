@@ -1,7 +1,6 @@
 package io.px.mcgui.mcui;
 
 import io.px.mcgui.mcui.elements.UITemplate;
-import io.px.mcgui.mcui.elements.UIView;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
@@ -30,8 +29,7 @@ public enum TemplateManager implements SimpleSynchronousResourceReloadListener {
                 String baseUri = rawid.getNamespace() + "/" + "templates" + "/" + rawid.getPath();
                 Document doc = Jsoup.parse(res.getInputStream(), "UTF-8", baseUri);
                 templates.put(id, MCUIParser.parseTemplate(doc));
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 LOGGER.error("Failed to load file {} due to exception: ", id, e);
             }
         }

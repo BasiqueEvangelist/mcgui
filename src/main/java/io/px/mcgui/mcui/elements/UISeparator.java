@@ -14,6 +14,7 @@ public class UISeparator extends UIElement {
     public String getTitle() {
         return title.asString();
     }
+
     public Text getTitleAsText() {
         return title;
     }

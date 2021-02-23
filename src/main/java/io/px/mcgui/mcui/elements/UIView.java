@@ -8,7 +8,6 @@ package io.px.mcgui.mcui.elements;
 import io.px.mcgui.mcui.renderers.ButtonRenderer;
 import io.px.mcgui.mcui.renderers.LabelRenderer;
 import io.px.mcgui.mcui.renderers.SeparatorRenderer;
-import io.px.mcgui.mcui.renderers.TemplateRenderer;
 import me.lambdaurora.spruceui.Tooltip;
 import me.lambdaurora.spruceui.screen.SpruceScreen;
 import me.lambdaurora.spruceui.widget.SpruceSeparatorWidget;
@@ -21,10 +20,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,18 +55,18 @@ public class UIView extends SpruceScreen {
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
-    {
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
         this.children().stream().filter(child -> child instanceof Drawable).forEach(child -> ((Drawable) child).render(matrices, mouseX, mouseY, delta));
         this.children().stream().filter(child -> child instanceof SpruceSeparatorWidget).forEach(child -> ((SpruceSeparatorWidget) child).render(matrices, mouseX, mouseY, delta));
 
         super.render(matrices, mouseX, mouseY, delta);
 
-        if(showTitle) drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 8, 16777215);
+        if (showTitle) drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 8, 16777215);
 
         Tooltip.renderAll(this.parent, matrices);
     }
+
     public <T extends Element> T add(T element) {
         this.addChild(element);
         return element;
@@ -84,21 +81,21 @@ public class UIView extends SpruceScreen {
 
         }
         IDElements.values().forEach(element -> {
-            if(element.type == UIType.ROOT) return;
-            if(element.type == UIType.LABEL) LabelRenderer.getInstance().render(this, (UILabel) element);
-            if(element.type == UIType.BUTTON) ButtonRenderer.getInstance().render(this, (UIButton) element);
-            if(element.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(this, (UISeparator) element);
+            if (element.type == UIType.ROOT) return;
+            if (element.type == UIType.LABEL) LabelRenderer.getInstance().render(this, (UILabel) element);
+            if (element.type == UIType.BUTTON) ButtonRenderer.getInstance().render(this, (UIButton) element);
+            if (element.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(this, (UISeparator) element);
         });
         nonIDElements.forEach(element -> {
-            if(element.type == UIType.ROOT) return;
-            if(element.type == UIType.LABEL) LabelRenderer.getInstance().render(this, (UILabel) element);
-            if(element.type == UIType.BUTTON) ButtonRenderer.getInstance().render(this, (UIButton) element);
-            if(element.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(this, (UISeparator) element);
+            if (element.type == UIType.ROOT) return;
+            if (element.type == UIType.LABEL) LabelRenderer.getInstance().render(this, (UILabel) element);
+            if (element.type == UIType.BUTTON) ButtonRenderer.getInstance().render(this, (UIButton) element);
+            if (element.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(this, (UISeparator) element);
         });
     }
 
     public void addElement(UIElement element) {
-        if(element.id == null) {
+        if (element.id == null) {
             System.out.println(element);
             nonIDElements.add(element);
             LOGGER.warn("Added element did not have an ID!");

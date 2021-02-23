@@ -15,6 +15,7 @@ public class ResourceHelper {
 
     /**
      * Get a file from the resources folder of a jar.
+     *
      * @param path The path of where the file is.
      * @param root Any class from the jar you want to get resources from.
      * @return A file class you can use.
@@ -28,7 +29,7 @@ public class ResourceHelper {
         } else {
             File tmp = File.createTempFile(String.valueOf(new Random().nextLong()), "cache-mcgui.tmp");
             InputStream in = root.getClassLoader().getResourceAsStream(path);
-            try(OutputStream outputStream = new FileOutputStream(tmp)) {
+            try (OutputStream outputStream = new FileOutputStream(tmp)) {
                 IOUtils.copy(in, outputStream);
             } catch (FileNotFoundException e) {
                 throw e;

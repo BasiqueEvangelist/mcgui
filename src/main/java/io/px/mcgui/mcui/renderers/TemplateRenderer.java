@@ -4,7 +4,6 @@ import io.px.mcgui.mcui.ElementParserRegistry;
 import io.px.mcgui.mcui.elements.UIElement;
 import io.px.mcgui.mcui.elements.UITemplate;
 import io.px.mcgui.mcui.elements.UIView;
-import net.minecraft.client.gui.Drawable;
 import org.jsoup.nodes.Element;
 
 public class TemplateRenderer implements Renderer<UITemplate> {

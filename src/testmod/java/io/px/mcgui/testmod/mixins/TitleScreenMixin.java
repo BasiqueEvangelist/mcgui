@@ -5,6 +5,7 @@
 
 package io.px.mcgui.testmod.mixins;
 
+import io.px.mcgui.MCGUI;
 import io.px.mcgui.mcui.DocumentManager;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceButtonWidget;
@@ -31,7 +32,7 @@ public class TitleScreenMixin extends Screen
     {
         this.addButton(new SpruceButtonWidget(Position.of(0, 12), 150, 20, new LiteralText("SpruceUI Test Menu"),
             btn -> {
-                this.client.openScreen(DocumentManager.INSTANCE.fetch(new Identifier("mcgui-testmod:test")));
+                MCGUI.open(new Identifier("mcgui-testmod:test"));
             }).asVanilla());
     }
 }

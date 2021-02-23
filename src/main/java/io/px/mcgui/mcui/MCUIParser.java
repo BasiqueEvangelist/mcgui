@@ -5,7 +5,6 @@
 
 package io.px.mcgui.mcui;
 
-import io.px.mcgui.mcui.elements.UIElement;
 import io.px.mcgui.mcui.elements.UITemplate;
 import io.px.mcgui.mcui.elements.UIView;
 import net.minecraft.text.LiteralText;
@@ -15,18 +14,17 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 
 public class MCUIParser {
 
-    private final static String[] validRootNames = new String[] {
+    private final static String[] validRootNames = new String[]{
             "screen"
     };
 
     /**
      * Parse a .mcui file from a JSoup Document.
+     *
      * @param doc A JSoup document.
      * @return A parsed MCUI document.
      */
@@ -38,15 +36,15 @@ public class MCUIParser {
         Attributes attr = root.attributes();
 
         // Title
-        if(attr.hasKey("title")) {
-            if(root.attributes().get("loc").equals("true")) {
+        if (attr.hasKey("title")) {
+            if (root.attributes().get("loc").equals("true")) {
                 document = new UIView(null, new TranslatableText(root.attributes().get("title")));
             } else {
                 document = new UIView(null, new LiteralText(root.attributes().get("title")));
             }
         }
 
-        if(attr.hasKey("controller")) {
+        if (attr.hasKey("controller")) {
             try {
                 Class<?> c = Class.forName(attr.get("controller"));
                 document.controller = c;
@@ -55,15 +53,15 @@ public class MCUIParser {
             }
         }
 
-        if(attr.hasKey("showtitle")) {
+        if (attr.hasKey("showtitle")) {
             document.showTitle = Boolean.parseBoolean(attr.get("showtitle"));
         }
 
         // Events
-        if(attr.hasKey("onrender")) {
+        if (attr.hasKey("onrender")) {
             try {
-                if(document.controller != null) {
-                    document.renderEvent = document.controller.getDeclaredMethod(attr.get("onrender"), new Class[]{ UIView.class });
+                if (document.controller != null) {
+                    document.renderEvent = document.controller.getDeclaredMethod(attr.get("onrender"), UIView.class);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -78,8 +76,10 @@ public class MCUIParser {
 
         return document;
     }
+
     /**
      * Parse a .mcui file from a JSoup Document.
+     *
      * @param doc A JSoup document.
      * @return A parsed MCUI document.
      */

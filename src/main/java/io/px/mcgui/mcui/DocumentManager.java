@@ -33,8 +33,7 @@ public enum DocumentManager implements SimpleSynchronousResourceReloadListener {
                 String baseUri = rawid.getNamespace() + "/" + "documents" + "/" + rawid.getPath();
                 Document doc = Jsoup.parse(res.getInputStream(), "UTF-8", baseUri);
                 views.put(id, MCUIParser.parse(doc));
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 LOGGER.error("Failed to load file {} due to exception: ", id, e);
             }
         }

@@ -8,8 +8,6 @@ import net.minecraft.util.Identifier;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Element;
 
-import java.util.Objects;
-
 public class TemplateParser implements Parser<UITemplate> {
     @Override
     public UITemplate parse(Element element, UIView doc) {
