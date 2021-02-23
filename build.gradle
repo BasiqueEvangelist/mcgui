@@ -41,30 +41,30 @@ task runTestmodServer(type: RunServerTask) {
     classpath sourceSets.testmod.runtimeClasspath
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-
-            pom {
-                name = "MCGUI"
-                description = "A GUI library for fabric. Simple HTML like syntax and easy to use. "
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            url "https://repo.repsy.io/mvn/px01tv/hubbajub/"
-            credentials {
-                username = repsyUsername
-                password = repsyPassword
-            }
-        }
-    }
-}
+//publishing {
+//    publications {
+//        maven(MavenPublication) {
+//            artifact(remapJar) {
+//                builtBy remapJar
+//            }
+//
+//            pom {
+//                name = "MCGUI"
+//                description = "A GUI library for fabric. Simple HTML like syntax and easy to use. "
+//            }
+//        }
+//    }
+//
+//    repositories {
+//        maven {
+//            url "https://repo.repsy.io/mvn/px01tv/hubbajub/"
+//            credentials {
+//                username = repsyUsername
+//                password = repsyPassword
+//            }
+//        }
+//    }
+//}
 
 configurations {
     shadow
