@@ -1,8 +1,8 @@
-package io.px.mcgui.mcui.renderers;
+package io.px.mcgui.mcui.templating;
 
 import io.px.mcgui.mcui.ElementParserRegistry;
 import io.px.mcgui.mcui.elements.UIElement;
-import io.px.mcgui.mcui.elements.UITemplate;
+import io.px.mcgui.mcui.renderers.Renderer;
 import io.px.mcgui.mcui.elements.UIView;
 import org.jsoup.nodes.Element;
 
@@ -15,7 +15,7 @@ public class TemplateRenderer implements Renderer<UITemplate> {
     public void render(UIView document, UITemplate element) {
         for (Element elements : element.elements) {
             System.out.println(elements.nodeName());
-            UIElement finalElement = ElementParserRegistry.get(elements.nodeName()).parse(elements, document);
+            UIElement finalElement = (UIElement) ElementParserRegistry.get(elements.nodeName()).parse(elements, document);
             finalElement.x += element.x;
             finalElement.y += element.y;
             finalElement.parent = element;

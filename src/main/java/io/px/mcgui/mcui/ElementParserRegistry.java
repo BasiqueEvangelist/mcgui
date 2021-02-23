@@ -1,6 +1,7 @@
 package io.px.mcgui.mcui;
 
 import io.px.mcgui.mcui.parsers.*;
+import io.px.mcgui.mcui.templating.TemplateParser;
 
 import java.util.HashMap;
 import java.util.Map;

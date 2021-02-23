@@ -1,6 +1,6 @@
 package io.px.mcgui.mcui;
 
-import io.px.mcgui.mcui.templating.UITemplate;
+import io.px.mcgui.mcui.toasts.UIToast;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
@@ -14,33 +14,33 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 import java.util.HashMap;
 
-public enum TemplateManager implements SimpleSynchronousResourceReloadListener {
+public enum ToastsManager implements SimpleSynchronousResourceReloadListener {
     INSTANCE;
 
-    private static final Logger LOGGER = LogManager.getLogger("MCGui/TemplateManager");
-    private final HashMap<Identifier, UITemplate> templates = new HashMap<>();
+    private static final Logger LOGGER = LogManager.getLogger("MCGui/ToastManager");
+    private final HashMap<Identifier, UIToast> toasts = new HashMap<>();
 
     @Override
     public void apply(ResourceManager manager) {
-        for (Identifier rawid : manager.findResources("templates", p -> p.endsWith(".mcui"))) {
-            Identifier id = new Identifier(rawid.getNamespace(), rawid.getPath().substring("templates/".length(), rawid.getPath().length() - ".mcui".length()));
+        for (Identifier rawid : manager.findResources("toasts", p -> p.endsWith(".mcui"))) {
+            Identifier id = new Identifier(rawid.getNamespace(), rawid.getPath().substring("toasts/".length(), rawid.getPath().length() - ".mcui".length()));
             try {
                 Resource res = manager.getResource(rawid);
-                String baseUri = rawid.getNamespace() + "/" + "templates" + "/" + rawid.getPath();
+                String baseUri = rawid.getNamespace() + "/" + "toasts" + "/" + rawid.getPath();
                 Document doc = Jsoup.parse(res.getInputStream(), "UTF-8", baseUri);
-                templates.put(id, MCUIParser.parseTemplate(doc));
+                toasts.put(id, MCUIParser.parseToast(doc));
             } catch (IOException e) {
                 LOGGER.error("Failed to load file {} due to exception: ", id, e);
             }
         }
     }
 
-    public @Nullable UITemplate fetch(Identifier id) {
-        return templates.get(id);
+    public @Nullable UIToast fetch(Identifier id) {
+        return toasts.get(id);
     }
 
     @Override
     public Identifier getFabricId() {
-        return new Identifier("mcgui", "templates");
+        return new Identifier("mcgui", "toasts");
     }
 }

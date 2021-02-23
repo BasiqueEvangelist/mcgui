@@ -1,9 +1,8 @@
-package io.px.mcgui.mcui.parsers;
+package io.px.mcgui.mcui.templating;
 
 import io.px.mcgui.mcui.TemplateManager;
-import io.px.mcgui.mcui.elements.UITemplate;
+import io.px.mcgui.mcui.parsers.Parser;
 import io.px.mcgui.mcui.elements.UIView;
-import io.px.mcgui.mcui.renderers.TemplateRenderer;
 import net.minecraft.util.Identifier;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Element;

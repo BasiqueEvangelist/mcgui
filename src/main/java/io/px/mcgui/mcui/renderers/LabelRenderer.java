@@ -1,7 +1,7 @@
 package io.px.mcgui.mcui.renderers;
 
 import io.px.mcgui.mcui.elements.UILabel;
-import io.px.mcgui.mcui.elements.UITemplate;
+import io.px.mcgui.mcui.templating.UITemplate;
 import io.px.mcgui.mcui.elements.UIView;
 import me.lambdaurora.spruceui.Position;
 import me.lambdaurora.spruceui.widget.SpruceLabelWidget;

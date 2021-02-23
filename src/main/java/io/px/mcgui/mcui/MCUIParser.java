@@ -5,8 +5,11 @@
 
 package io.px.mcgui.mcui;
 
-import io.px.mcgui.mcui.elements.UITemplate;
+import io.px.mcgui.mcui.elements.UIElement;
+import io.px.mcgui.mcui.templating.UITemplate;
 import io.px.mcgui.mcui.elements.UIView;
+import io.px.mcgui.mcui.toasts.ToastParser;
+import io.px.mcgui.mcui.toasts.UIToast;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import org.jsoup.nodes.Attributes;
@@ -14,7 +17,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import javax.annotation.Nullable;
-import java.lang.reflect.Field;
 import java.util.HashSet;
 
 public class MCUIParser {
@@ -72,7 +74,7 @@ public class MCUIParser {
         // Elements
 
         for (Element element : root.children()) {
-            document.addElement(ElementParserRegistry.get(element.nodeName()).parse(element, document));
+            document.addElement((UIElement) ElementParserRegistry.get(element.nodeName()).parse(element, document));
         }
 
         return document;
@@ -92,6 +94,13 @@ public class MCUIParser {
         template.elements = new HashSet<>(root.children());
 
         return template;
+    }
+
+    public static UIToast parseToast(Document doc) {
+        Element root = doc.body().children().first();
+
+        UIToast toast = ToastParser.getInstance().parse(root, null);
+        return toast;
     }
 }
 

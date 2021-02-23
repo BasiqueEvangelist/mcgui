@@ -1,5 +1,7 @@
-package io.px.mcgui.mcui.elements;
+package io.px.mcgui.mcui.templating;
 
+import io.px.mcgui.mcui.elements.UIElement;
+import io.px.mcgui.mcui.elements.UIType;
 import org.jsoup.nodes.Element;
 
 import java.util.HashSet;
