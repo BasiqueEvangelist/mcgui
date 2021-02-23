@@ -99,8 +99,9 @@ public class ViewScreen extends SpruceScreen {
             System.out.println(element);
             nonIDElements.add(element);
             LOGGER.warn("Added element did not have an ID!");
+        } else {
+            IDElements.put(element.id, element);
         }
-        IDElements.put(element.id, element);
     }
 
     public void addElements(List<UIElement> elements) {
