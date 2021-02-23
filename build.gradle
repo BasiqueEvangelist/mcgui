@@ -59,8 +59,8 @@ publishing {
         maven {
             url "https://repo.repsy.io/mvn/px01tv/hubbajub/"
             credentials {
-                username repsyUsername
-                password repsyPassword
+                username = repsyUsername
+                password = repsyPassword
             }
         }
     }
