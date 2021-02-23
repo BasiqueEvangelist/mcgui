@@ -31,7 +31,7 @@ public class SeparatorParser implements Parser<UISeparator> {
             try {
                 sep.renderEvent = screen.controller.getDeclaredMethod(attr.get("onrender"), ViewScreen.class);
             } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
 

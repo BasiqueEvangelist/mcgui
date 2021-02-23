@@ -51,8 +51,8 @@ public class MCUIParser {
             try {
                 Class<?> c = Class.forName(attr.get("controller"));
                 screen.controller = c;
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
 
@@ -62,12 +62,12 @@ public class MCUIParser {
 
         // Events
         if (attr.hasKey("onrender")) {
-            try {
-                if (screen.controller != null) {
+            if (screen.controller != null) {
+                try {
                     screen.renderEvent = screen.controller.getDeclaredMethod(attr.get("onrender"), ViewScreen.class);
+                } catch (NoSuchMethodException e) {
+                    throw new RuntimeException(e);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
 

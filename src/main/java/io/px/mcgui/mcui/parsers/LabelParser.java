@@ -30,7 +30,7 @@ public class LabelParser implements Parser<UILabel> {
             try {
                 lbl.renderEvent = screen.controller.getDeclaredMethod(attr.get("onrender"), ViewScreen.class);
             } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
 

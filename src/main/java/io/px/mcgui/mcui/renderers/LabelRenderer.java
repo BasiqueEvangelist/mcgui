@@ -8,6 +8,8 @@ import me.lambdaurora.spruceui.widget.SpruceLabelWidget;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class LabelRenderer implements Renderer<UILabel> {
     private static final Logger LOGGER = LogManager.getLogger("MCGui/LabelRenderer");
 
@@ -32,8 +34,8 @@ public class LabelRenderer implements Renderer<UILabel> {
         if (label.renderEvent != null) {
             try {
                 label.renderEvent.invoke(controller, screen, label);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (InvocationTargetException | IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
         }
 

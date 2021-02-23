@@ -20,6 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,10 +36,9 @@ public class ViewScreen extends SpruceScreen {
     public Object getControllerInstance() {
         try {
             return controller.getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (InstantiationException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException(e);
         }
-        return new Object();
     }
 
     public HashMap<String, UIElement> IDElements = new HashMap<>();
@@ -75,10 +75,12 @@ public class ViewScreen extends SpruceScreen {
     @Override
     protected void init() {
         super.init();
-        try {
-            renderEvent.invoke(getControllerInstance(), this);
-        } catch (Exception e) {
-
+        if (renderEvent != null) {
+            try {
+                renderEvent.invoke(getControllerInstance(), this);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
         }
         IDElements.values().forEach(element -> {
             if (element.type == UIType.ROOT) return;

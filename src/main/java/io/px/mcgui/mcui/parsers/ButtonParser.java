@@ -29,14 +29,14 @@ public class ButtonParser implements Parser<UIButton> {
             try {
                 btn.onClick = screen.controller.getDeclaredMethod(attr.get("onclick"), ViewScreen.class, UIButton.class);
             } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
         if (attr.hasKey("onrender")) {
             try {
                 btn.renderEvent = screen.controller.getDeclaredMethod(attr.get("onrender"), ViewScreen.class);
             } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
 

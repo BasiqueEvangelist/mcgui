@@ -8,6 +8,8 @@ import me.lambdaurora.spruceui.widget.SpruceButtonWidget;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class ButtonRenderer implements Renderer<UIButton> {
     private static final Logger LOGGER = LogManager.getLogger("MCGui/ButtonRenderer");
 
@@ -30,8 +32,8 @@ public class ButtonRenderer implements Renderer<UIButton> {
             if (button.onClick != null) {
                 try {
                     button.onClick.invoke(finalController, screen, button);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (InvocationTargetException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
                 }
             }
         });
@@ -41,8 +43,8 @@ public class ButtonRenderer implements Renderer<UIButton> {
         if (button.renderEvent != null) {
             try {
                 button.renderEvent.invoke(controller, screen, button);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (InvocationTargetException | IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
         }
 

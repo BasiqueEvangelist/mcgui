@@ -4,6 +4,7 @@ import io.px.mcgui.mcui.elements.UIElement;
 import io.px.mcgui.mcui.elements.UIType;
 import org.jsoup.nodes.Element;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 
 public class UITemplate extends UIElement {
@@ -18,8 +19,8 @@ public class UITemplate extends UIElement {
         if (controller != null) {
             try {
                 return controller.getDeclaredConstructor().newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
         }
         return old;

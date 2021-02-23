@@ -8,6 +8,8 @@ import me.lambdaurora.spruceui.widget.SpruceSeparatorWidget;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class SeparatorRenderer implements Renderer<UISeparator> {
     private static final Logger LOGGER = LogManager.getLogger("MCGui/SeparatorRenderer");
 
@@ -31,8 +33,8 @@ public class SeparatorRenderer implements Renderer<UISeparator> {
         if (separator.renderEvent != null) {
             try {
                 separator.renderEvent.invoke(controller, screen, separator);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (InvocationTargetException | IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
         }
 
