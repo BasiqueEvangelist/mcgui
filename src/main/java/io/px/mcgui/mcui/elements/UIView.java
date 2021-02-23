@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class UIView extends SpruceScreen {
-    private static final Logger LOGGER = LogManager.getLogger("MCGui/UIDocument");
+    private static final Logger LOGGER = LogManager.getLogger("MCGui/UIView");
     public Screen parent;
 
     public List<UIElement> nonIDElements = new ArrayList<>();

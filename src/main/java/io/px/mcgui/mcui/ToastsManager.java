@@ -17,7 +17,7 @@ import java.util.HashMap;
 public enum ToastsManager implements SimpleSynchronousResourceReloadListener {
     INSTANCE;
 
-    private static final Logger LOGGER = LogManager.getLogger("MCGui/ToastManager");
+    private static final Logger LOGGER = LogManager.getLogger("MCGui/ToastsManager");
     private final HashMap<Identifier, UIToast> toasts = new HashMap<>();
 
     @Override

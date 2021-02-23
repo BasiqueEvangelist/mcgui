@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class SeparatorRenderer implements Renderer<UISeparator> {
-    private static final Logger LOGGER = LogManager.getLogger("MCGui/ButtonRenderer");
+    private static final Logger LOGGER = LogManager.getLogger("MCGui/SeparatorRenderer");
 
     public static SeparatorRenderer getInstance() {
         return new SeparatorRenderer();
