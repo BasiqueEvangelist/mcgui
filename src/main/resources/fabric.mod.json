@@ -14,7 +14,7 @@
     "sources": "https://github.com/px01tv/mcgui"
   },
 
-  "license": "CC0-1.0",
+  "license": "MPL-2.0",
   "icon": "assets/mcgui/icon.png",
   "environment": "*",
   "entrypoints": {

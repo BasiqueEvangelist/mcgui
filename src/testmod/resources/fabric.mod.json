@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "MCGui Test Mod",
 
-  "license": "CC0-1.0",
+  "license": "MPL-2.0",
   "environment": "*",
   "entrypoints": {
     "main": [
