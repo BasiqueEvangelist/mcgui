@@ -12,10 +12,6 @@ public class UILabel extends UIElement {
     public Text contents;
     public int fixedWidth;
 
-    public UILabel() {
-        type = UIType.LABEL;
-    }
-
     public String getContents() {
         return contents.asString();
     }

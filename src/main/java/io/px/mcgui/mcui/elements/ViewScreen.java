@@ -89,18 +89,16 @@ public class ViewScreen<C> extends SpruceScreen implements UIView<C> {
             }
         }
         IDElements.values().forEach(element -> {
-            if (element.type == UIType.ROOT) return;
-            if (element.type == UIType.LABEL) LabelRenderer.getInstance().render(this, (UILabel) element);
-            if (element.type == UIType.BUTTON) ButtonRenderer.getInstance().render(this, (UIButton) element);
-            if (element.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(this, (UISeparator) element);
-            if (element.type == UIType.TEMPLATE) TemplateRenderer.getInstance().render(this, (InsertedTemplate<?>) element);
+            if (element instanceof UILabel) LabelRenderer.getInstance().render(this, (UILabel) element);
+            else if (element instanceof UIButton) ButtonRenderer.getInstance().render(this, (UIButton) element);
+            else if (element instanceof UISeparator) SeparatorRenderer.getInstance().render(this, (UISeparator) element);
+            else if (element instanceof InsertedTemplate) TemplateRenderer.getInstance().render(this, (InsertedTemplate<?>) element);
         });
         nonIDElements.forEach(element -> {
-            if (element.type == UIType.ROOT) return;
-            if (element.type == UIType.LABEL) LabelRenderer.getInstance().render(this, (UILabel) element);
-            if (element.type == UIType.BUTTON) ButtonRenderer.getInstance().render(this, (UIButton) element);
-            if (element.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(this, (UISeparator) element);
-            if (element.type == UIType.TEMPLATE) TemplateRenderer.getInstance().render(this, (InsertedTemplate<?>) element);
+            if (element instanceof UILabel) LabelRenderer.getInstance().render(this, (UILabel) element);
+            else if (element instanceof UIButton) ButtonRenderer.getInstance().render(this, (UIButton) element);
+            else if (element instanceof UISeparator) SeparatorRenderer.getInstance().render(this, (UISeparator) element);
+            else if (element instanceof InsertedTemplate) TemplateRenderer.getInstance().render(this, (InsertedTemplate<?>) element);
         });
     }
 

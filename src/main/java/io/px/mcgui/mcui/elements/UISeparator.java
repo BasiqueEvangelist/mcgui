@@ -4,10 +4,6 @@ import net.minecraft.text.Text;
 
 public class UISeparator extends UIElement {
 
-    public UISeparator() {
-        this.type = UIType.SEPARATOR;
-    }
-
     public int width;
     public Text title;
 

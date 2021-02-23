@@ -18,10 +18,6 @@ public class UIButton extends UIElement {
     public int width;
     public int height;
 
-    public UIButton() {
-        type = UIType.BUTTON;
-    }
-
     public String getContents() {
         return contents.asString();
     }

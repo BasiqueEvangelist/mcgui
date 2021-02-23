@@ -14,18 +14,16 @@ public class TemplateRenderer implements Renderer<InsertedTemplate<?>> {
     @Override
     public void render(UIView<?> view, InsertedTemplate<?> element) {
         element.IDElements.values().forEach(child -> {
-            if (child.type == UIType.ROOT) return;
-            if (child.type == UIType.LABEL) LabelRenderer.getInstance().render(element, (UILabel) child);
-            if (child.type == UIType.BUTTON) ButtonRenderer.getInstance().render(element, (UIButton) child);
-            if (child.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(element, (UISeparator) child);
-            if (child.type == UIType.TEMPLATE) TemplateRenderer.getInstance().render(element, (InsertedTemplate<?>) child);
+            if (child instanceof UILabel) LabelRenderer.getInstance().render(element, (UILabel) child);
+            else if (child instanceof UIButton) ButtonRenderer.getInstance().render(element, (UIButton) child);
+            else if (child instanceof UISeparator) SeparatorRenderer.getInstance().render(element, (UISeparator) child);
+            else if (child instanceof InsertedTemplate) TemplateRenderer.getInstance().render(element, (InsertedTemplate<?>) child);
         });
         element.nonIDElements.forEach(child -> {
-            if (child.type == UIType.ROOT) return;
-            if (child.type == UIType.LABEL) LabelRenderer.getInstance().render(element, (UILabel) child);
-            if (child.type == UIType.BUTTON) ButtonRenderer.getInstance().render(element, (UIButton) child);
-            if (child.type == UIType.SEPARATOR) SeparatorRenderer.getInstance().render(element, (UISeparator) child);
-            if (child.type == UIType.TEMPLATE) TemplateRenderer.getInstance().render(element, (InsertedTemplate<?>) child);
+            if (child instanceof UILabel) LabelRenderer.getInstance().render(element, (UILabel) child);
+            else if (child instanceof UIButton) ButtonRenderer.getInstance().render(element, (UIButton) child);
+            else if (child instanceof UISeparator) SeparatorRenderer.getInstance().render(element, (UISeparator) child);
+            else if (child instanceof InsertedTemplate) TemplateRenderer.getInstance().render(element, (InsertedTemplate<?>) child);
         });
     }
 }

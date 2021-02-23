@@ -1,7 +1,6 @@
 package io.px.mcgui.mcui.templating;
 
 import io.px.mcgui.mcui.elements.UIElement;
-import io.px.mcgui.mcui.elements.UIType;
 import io.px.mcgui.mcui.elements.UIView;
 import net.minecraft.client.gui.Element;
 import org.apache.logging.log4j.LogManager;
@@ -14,10 +13,6 @@ import java.util.List;
 
 public class InsertedTemplate<C> extends UIElement implements UIView<C> {
     private static final Logger LOGGER = LogManager.getLogger("MCGui/InsertedTemplate");
-
-    public InsertedTemplate() {
-        this.type = UIType.TEMPLATE;
-    }
 
     public Class<C> controller;
     public UIView<?> parent;
