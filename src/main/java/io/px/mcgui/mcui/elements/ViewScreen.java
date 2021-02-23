@@ -64,7 +64,6 @@ public class ViewScreen<C> extends SpruceScreen implements UIView<C> {
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
         this.children().stream().filter(child -> child instanceof Drawable).forEach(child -> ((Drawable) child).render(matrices, mouseX, mouseY, delta));
-        this.children().stream().filter(child -> child instanceof SpruceSeparatorWidget).forEach(child -> ((SpruceSeparatorWidget) child).render(matrices, mouseX, mouseY, delta));
 
         super.render(matrices, mouseX, mouseY, delta);
 
