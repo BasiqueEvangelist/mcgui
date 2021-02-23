@@ -19,12 +19,12 @@ If you are using MCGUI in your mod, add the following to your `build.gradle` fil
 ```groovy
 repositories {
     maven {
-        url = "TBD"
+        url = "https://repo.repsy.io/mvn/px01tv/hubbajub/"
     }
 }
 
 dependencies {
-    modImplementation "TBD"
+    modImplementation "io.px:mcgui:[version]"
 }
 ```
 
