@@ -4,6 +4,7 @@ import io.px.mcgui.mcui.ToastsManager;
 import io.px.mcgui.mcui.ViewScreenManager;
 import io.px.mcgui.mcui.blueprints.ViewScreenBlueprint;
 import io.px.mcgui.mcui.elements.ViewScreen;
+import io.px.mcgui.mcui.toasts.ToastBlueprint;
 import io.px.mcgui.mcui.toasts.UIToast;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -50,22 +51,22 @@ public final class MCGUI {
     }
 
     /**
-     * Fetch a UIToast
+     * Fetch a ToastBlueprint
      * @param id The identifier usually modid:filename
-     * @return The toast.
+     * @return The toast blueprint.
      */
-    public static UIToast fetchToast(Identifier id) {
+    public static ToastBlueprint fetchToast(Identifier id) {
         return ToastsManager.INSTANCE.fetch(id);
     }
 
     /**
-     * Fetch and show UIToast
+     * Fetch, restore and show a UIToast
      * @param id The identifier usually modid:filename
      * @return The toast.
      */
     @Environment(EnvType.CLIENT)
     public static UIToast openToast(Identifier id) {
-        UIToast toast = ToastsManager.INSTANCE.fetch(id);
+        UIToast toast = ToastsManager.INSTANCE.fetch(id).restore();
         MinecraftClient.getInstance().getToastManager().add(toast);
         return toast;
     }

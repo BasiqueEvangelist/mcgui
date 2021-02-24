@@ -1,6 +1,6 @@
 package io.px.mcgui.mcui;
 
-import io.px.mcgui.mcui.toasts.UIToast;
+import io.px.mcgui.mcui.toasts.ToastBlueprint;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
@@ -18,7 +18,7 @@ public enum ToastsManager implements SimpleSynchronousResourceReloadListener {
     INSTANCE;
 
     private static final Logger LOGGER = LogManager.getLogger("MCGui/ToastsManager");
-    private final HashMap<Identifier, UIToast> toasts = new HashMap<>();
+    private final HashMap<Identifier, ToastBlueprint> toasts = new HashMap<>();
 
     @Override
     public void apply(ResourceManager manager) {
@@ -35,7 +35,7 @@ public enum ToastsManager implements SimpleSynchronousResourceReloadListener {
         }
     }
 
-    public @Nullable UIToast fetch(Identifier id) {
+    public @Nullable ToastBlueprint fetch(Identifier id) {
         return toasts.get(id);
     }
 

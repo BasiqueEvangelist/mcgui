@@ -9,7 +9,7 @@ import io.px.mcgui.mcui.blueprints.BlueprintParserRegistry;
 import io.px.mcgui.mcui.blueprints.ViewScreenBlueprint;
 import io.px.mcgui.mcui.elements.UIView;
 import io.px.mcgui.mcui.templating.TemplateBlueprint;
-import io.px.mcgui.mcui.toasts.UIToast;
+import io.px.mcgui.mcui.toasts.ToastBlueprint;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -108,7 +108,7 @@ public class MCUIParser {
         return template;
     }
 
-    public static UIToast parseToast(Document doc) {
+    public static ToastBlueprint parseToast(Document doc) {
         Element root = doc.body().children().first();
         Attributes attr = root.attributes();
 
@@ -127,7 +127,7 @@ public class MCUIParser {
             }
         }
 
-        return new UIToast(SystemToast.Type.valueOf(attr.get("type")), title, contents);
+        return new ToastBlueprint(SystemToast.Type.valueOf(attr.get("type")), title, contents);
     }
 }
 
