@@ -22,9 +22,8 @@ public class ViewScreenBlueprint<C> implements UIViewBlueprint {
     }
 
     public ViewScreen<C> restore(@Nullable Screen parent) {
-        ViewScreen<C> screen = new ViewScreen<>(parent, title);
+        ViewScreen<C> screen = new ViewScreen<>(controller, parent, title);
 
-        screen.controller = controller;
         screen.showTitle = showTitle;
         screen.renderEvent = renderEvent;
         for (UIBlueprint<?> element : elements) {

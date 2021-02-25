@@ -33,7 +33,7 @@ public class ViewScreen<C> extends SpruceScreen implements UIView<C> {
     public Screen parent;
 
     public List<UIElement> nonIDElements = new ArrayList<>();
-    public Class<C> controller;
+    private final Class<C> controller;
 
     public C getControllerInstance() {
         if (controller == null) return null;
@@ -57,8 +57,9 @@ public class ViewScreen<C> extends SpruceScreen implements UIView<C> {
     // Events
     public Method renderEvent;
 
-    public ViewScreen(@Nullable Screen parent, Text title) {
+    public ViewScreen(Class<C> controller, @Nullable Screen parent, Text title) {
         super(title);
+        this.controller = controller;
         this.parent = parent;
     }
 
