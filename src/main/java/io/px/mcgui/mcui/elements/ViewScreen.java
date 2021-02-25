@@ -62,14 +62,9 @@ public class ViewScreen<C> extends SpruceScreen implements UIView<C> {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        this.children().stream().filter(child -> child instanceof Drawable).forEach(child -> ((Drawable) child).render(matrices, mouseX, mouseY, delta));
-
         super.render(matrices, mouseX, mouseY, delta);
 
         if (showTitle) drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 8, 16777215);
-
-        Tooltip.renderAll(this.parent, matrices);
     }
 
     public <T extends Element> T addMinecraftElement(T element) {
