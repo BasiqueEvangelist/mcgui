@@ -4,5 +4,5 @@
   -->
 
 <screen title="test">
-    <template x="0" y="0" type="mcgui-testmod:test"></template>
+    <template x="0" y="0" type="mcgui-testmod:test"/>
 </screen>
