@@ -36,6 +36,8 @@ public class ViewScreen<C> extends SpruceScreen implements UIView<C> {
     public Class<C> controller;
 
     public C getControllerInstance() {
+        if (controller == null) return null;
+
         try {
             return controller.getDeclaredConstructor().newInstance();
         } catch (InstantiationException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
