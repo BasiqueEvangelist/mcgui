@@ -47,7 +47,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/px/mcgui/mcui/elements/UIDocument.html" title="class in io.px.mcgui.mcui.elements"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/px/mcgui/mcui/elements/UICheckbox.html" title="class in io.px.mcgui.mcui.elements"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/px/mcgui/mcui/elements/UILabel.html" title="class in io.px.mcgui.mcui.elements"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -107,7 +107,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../../io/px/mcgui/mcui/elements/UIButton.html" title="class in io.px.mcgui.mcui.elements">UIButton</a>, <a href="../../../../../io/px/mcgui/mcui/elements/UICheckbox.html" title="class in io.px.mcgui.mcui.elements">UICheckbox</a>, <a href="../../../../../io/px/mcgui/mcui/elements/UILabel.html" title="class in io.px.mcgui.mcui.elements">UILabel</a>, <a href="../../../../../io/px/mcgui/mcui/elements/UISeparator.html" title="class in io.px.mcgui.mcui.elements">UISeparator</a></dd>
+<dd><a href="../../../../../io/px/mcgui/mcui/templating/InsertedTemplate.html" title="class in io.px.mcgui.mcui.templating">InsertedTemplate</a>, <a href="../../../../../io/px/mcgui/mcui/elements/UIButton.html" title="class in io.px.mcgui.mcui.elements">UIButton</a>, <a href="../../../../../io/px/mcgui/mcui/elements/UICheckbox.html" title="class in io.px.mcgui.mcui.elements">UICheckbox</a>, <a href="../../../../../io/px/mcgui/mcui/elements/UILabel.html" title="class in io.px.mcgui.mcui.elements">UILabel</a>, <a href="../../../../../io/px/mcgui/mcui/elements/UISeparator.html" title="class in io.px.mcgui.mcui.elements">UISeparator</a></dd>
 </dl>
 <hr>
 <br>
@@ -136,12 +136,24 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/px/mcgui/mcui/elements/UIElement.html#id">id</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colFirst"><code><a href="../../../../../io/px/mcgui/mcui/elements/UIElement.html" title="class in io.px.mcgui.mcui.elements">UIElement</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/px/mcgui/mcui/elements/UIElement.html#parent">parent</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>me.lambdaurora.spruceui.widget.SpruceWidget</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/px/mcgui/mcui/elements/UIElement.html#rendered">rendered</a></span></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>java.lang.reflect.Method</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/px/mcgui/mcui/elements/UIElement.html#renderEvent">renderEvent</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/px/mcgui/mcui/elements/UIType.html" title="enum in io.px.mcgui.mcui.elements">UIType</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/px/mcgui/mcui/elements/UIElement.html#type">type</a></span></code>&nbsp;</td>
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/px/mcgui/mcui/elements/UIElement.html#x">x</a></span></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/px/mcgui/mcui/elements/UIElement.html#y">y</a></span></code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -210,13 +222,40 @@ extends java.lang.Object</pre>
 <pre>public&nbsp;java.lang.String id</pre>
 </li>
 </ul>
-<a name="type">
+<a name="x">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>type</h4>
-<pre>public&nbsp;<a href="../../../../../io/px/mcgui/mcui/elements/UIType.html" title="enum in io.px.mcgui.mcui.elements">UIType</a> type</pre>
+<h4>x</h4>
+<pre>public&nbsp;int x</pre>
+</li>
+</ul>
+<a name="y">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>y</h4>
+<pre>public&nbsp;int y</pre>
+</li>
+</ul>
+<a name="parent">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>parent</h4>
+<pre>public&nbsp;<a href="../../../../../io/px/mcgui/mcui/elements/UIElement.html" title="class in io.px.mcgui.mcui.elements">UIElement</a> parent</pre>
+</li>
+</ul>
+<a name="rendered">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>rendered</h4>
+<pre>public&nbsp;me.lambdaurora.spruceui.widget.SpruceWidget rendered</pre>
 </li>
 </ul>
 <a name="renderEvent">
@@ -225,7 +264,7 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>renderEvent</h4>
-<pre>public&nbsp;java.lang.String renderEvent</pre>
+<pre>public&nbsp;java.lang.reflect.Method renderEvent</pre>
 </li>
 </ul>
 </li>
@@ -289,7 +328,7 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/px/mcgui/mcui/elements/UIDocument.html" title="class in io.px.mcgui.mcui.elements"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/px/mcgui/mcui/elements/UICheckbox.html" title="class in io.px.mcgui.mcui.elements"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/px/mcgui/mcui/elements/UILabel.html" title="class in io.px.mcgui.mcui.elements"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

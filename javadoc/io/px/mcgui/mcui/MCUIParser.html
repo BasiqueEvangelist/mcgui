@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9};
+var methods = {"i0":9,"i1":9,"i2":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -47,8 +47,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/px/mcgui/mcui/ElementParserRegistry.html" title="class in io.px.mcgui.mcui"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/px/mcgui/mcui/MethodsRegistry.html" title="class in io.px.mcgui.mcui"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li>Prev&nbsp;Class</li>
+<li><a href="../../../../io/px/mcgui/mcui/TemplateManager.html" title="enum in io.px.mcgui.mcui"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/px/mcgui/mcui/MCUIParser.html" target="_top">Frames</a></li>
@@ -145,10 +145,20 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/px/mcgui/mcui/elements/UIDocument.html" title="class in io.px.mcgui.mcui.elements">UIDocument</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/px/mcgui/mcui/MCUIParser.html#parse-org.jsoup.nodes.Document-">parse</a></span>(org.jsoup.nodes.Document&nbsp;doc)</code>
+<td class="colFirst"><code>static <a href="../../../../io/px/mcgui/mcui/blueprints/ViewScreenBlueprint.html" title="class in io.px.mcgui.mcui.blueprints">ViewScreenBlueprint</a>&lt;?&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/px/mcgui/mcui/MCUIParser.html#parseScreen-org.jsoup.nodes.Document-">parseScreen</a></span>(org.jsoup.nodes.Document&nbsp;doc)</code>
 <div class="block">Parse a .mcui file from a JSoup Document.</div>
 </td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../io/px/mcgui/mcui/templating/TemplateBlueprint.html" title="class in io.px.mcgui.mcui.templating">TemplateBlueprint</a>&lt;?&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/px/mcgui/mcui/MCUIParser.html#parseTemplate-org.jsoup.nodes.Document-">parseTemplate</a></span>(org.jsoup.nodes.Document&nbsp;doc)</code>
+<div class="block">Parse a .mcui file from a JSoup Document.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../io/px/mcgui/mcui/toasts/ToastBlueprint.html" title="class in io.px.mcgui.mcui.toasts">ToastBlueprint</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/px/mcgui/mcui/MCUIParser.html#parseToast-org.jsoup.nodes.Document-">parseToast</a></span>(org.jsoup.nodes.Document&nbsp;doc)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -189,13 +199,13 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="parse-org.jsoup.nodes.Document-">
+<a name="parseScreen-org.jsoup.nodes.Document-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
-<h4>parse</h4>
-<pre>public static&nbsp;<a href="../../../../io/px/mcgui/mcui/elements/UIDocument.html" title="class in io.px.mcgui.mcui.elements">UIDocument</a>&nbsp;parse(org.jsoup.nodes.Document&nbsp;doc)</pre>
+<h4>parseScreen</h4>
+<pre>public static&nbsp;<a href="../../../../io/px/mcgui/mcui/blueprints/ViewScreenBlueprint.html" title="class in io.px.mcgui.mcui.blueprints">ViewScreenBlueprint</a>&lt;?&gt;&nbsp;parseScreen(org.jsoup.nodes.Document&nbsp;doc)</pre>
 <div class="block">Parse a .mcui file from a JSoup Document.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -203,6 +213,31 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A parsed MCUI document.</dd>
 </dl>
+</li>
+</ul>
+<a name="parseTemplate-org.jsoup.nodes.Document-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>parseTemplate</h4>
+<pre>public static&nbsp;<a href="../../../../io/px/mcgui/mcui/templating/TemplateBlueprint.html" title="class in io.px.mcgui.mcui.templating">TemplateBlueprint</a>&lt;?&gt;&nbsp;parseTemplate(org.jsoup.nodes.Document&nbsp;doc)</pre>
+<div class="block">Parse a .mcui file from a JSoup Document.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>doc</code> - A JSoup document.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>A parsed MCUI document.</dd>
+</dl>
+</li>
+</ul>
+<a name="parseToast-org.jsoup.nodes.Document-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>parseToast</h4>
+<pre>public static&nbsp;<a href="../../../../io/px/mcgui/mcui/toasts/ToastBlueprint.html" title="class in io.px.mcgui.mcui.toasts">ToastBlueprint</a>&nbsp;parseToast(org.jsoup.nodes.Document&nbsp;doc)</pre>
 </li>
 </ul>
 </li>
@@ -232,8 +267,8 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/px/mcgui/mcui/ElementParserRegistry.html" title="class in io.px.mcgui.mcui"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/px/mcgui/mcui/MethodsRegistry.html" title="class in io.px.mcgui.mcui"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li>Prev&nbsp;Class</li>
+<li><a href="../../../../io/px/mcgui/mcui/TemplateManager.html" title="enum in io.px.mcgui.mcui"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/px/mcgui/mcui/MCUIParser.html" target="_top">Frames</a></li>
